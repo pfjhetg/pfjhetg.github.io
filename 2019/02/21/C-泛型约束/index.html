@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="pfjhetg">
 <meta property="og:description" content="在泛型类型定义之后（class 中或者 method 中）使用 where 约束泛型类型，有点像继承的语法。 可以直接参考微软的类型参数的约束（C#编程指南）    约束 说明     where T: struct 类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见使用可以为 null 的类型（C# 编程指南）。   where T : class 类">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-21T04:50:08.906Z">
+<meta property="og:updated_time" content="2019-02-21T04:55:30.407Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C# 泛型约束">
 <meta name="twitter:description" content="在泛型类型定义之后（class 中或者 method 中）使用 where 约束泛型类型，有点像继承的语法。 可以直接参考微软的类型参数的约束（C#编程指南）    约束 说明     where T: struct 类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见使用可以为 null 的类型（C# 编程指南）。   where T : class 类">
@@ -375,11 +375,11 @@
 <td>类型参数必须具有无参数的公共构造函数。 当与其他约束一起使用时，new() 约束必须最后指定。</td>
 </tr>
 <tr>
-<td>where T : <base class name></td>
+<td>where T : \<base class name></td>
 <td>类型参数必须是指定的基类或派生自指定的基类。</td>
 </tr>
 <tr>
-<td>where T : <interface name></interface></td>
+<td>where T : \<interface name></interface></td>
 <td>类型参数必须是指定的接口或实现指定的接口。 可以指定多个接口约束。 约束接口也可以是泛型的。</td>
 </tr>
 <tr>
