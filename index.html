@@ -262,6 +262,508 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/05/07/序列化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pfjhetg">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pfjhetg">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/07/序列化/" itemprop="url">序列化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-07T14:10:00+08:00">
+                2019-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index">
+                    <span itemprop="name">Unity3D</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>SerializedObject类和SerializedProperty类用于编辑序列化字段，SerializedProperty用来连接SerializedObject和Editor类。</p>
+<p>每一个Editor的子类都有一个serializedObject属性，表明这个Editor是一个Inspected。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/29357313" target="_blank" rel="noopener">相关连接</a></p>
+</blockquote>
+<h4 id="什么是序列化"><a href="#什么是序列化" class="headerlink" title="什么是序列化"></a>什么是序列化</h4><p>序列化就是将数据结构或对象状态转换成可供Unity保存和随后重建的自动化处理过程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“Serialization is the automatic process of transforming data structures or object states into a format that Unity can store and reconstruct later.”</span><br></pre></td></tr></table></figure>
+<p>Unity编辑器在很多时候会自动触发序列化：</p>
+<ul>
+<li>文件的保存/读取，包括Scene、Asset、AssetBundle，以及自定义的ScriptableObject等。</li>
+<li>Inspector窗口</li>
+<li>编辑器重加载脚本脚本</li>
+<li>Prefab和Instantiation</li>
+</ul>
+<h4 id="序列化规则"><a href="#序列化规则" class="headerlink" title="序列化规则"></a>序列化规则</h4><p>序列化规则简单来说有两点，一是类型规则，系统据此判断能不能对对象进行序列化；二是字段规则，系统据此判断该不该对对象进行序列化。当对象同时满足类型规则和字段规则时，系统就会对该对象进行序列化。</p>
+<ul>
+<li>类型规则</li>
+</ul>
+<p><img src="https://pic4.zhimg.com/80/v2-ff29318a8e2fbd0e4a3cb558e18bd85b_hd.png" alt="img"></p>
+<ul>
+<li>字段规则</li>
+</ul>
+<p><img src="https://pic3.zhimg.com/v2-0d7a7204f9b09387dc02e62ed733246e_r.jpg" alt="preview"></p>
+<p>编辑器退出前会对所有打开的窗口进行序列化并保存序列化数据到硬盘。在重启编辑器后，序列化系统读入序列化数据，重新生成对应的窗口对象。进行序列化时，只有满足序列化规则的对象的值得以保存，不满足规则的对象则被序列化系统忽略。</p>
+<p>举个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class MyClass &#123;</span><br><span class="line">    public string s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[Serializable]</span><br><span class="line">public class MyClassSerializable &#123;</span><br><span class="line">    public float f1;</span><br><span class="line">    [NonSerialized]public float f2;</span><br><span class="line">    private int i1;</span><br><span class="line">    [SerializeField]private int i2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class SerializationRuleWindow : EditorWindow &#123;</span><br><span class="line">    public MyClass m1;</span><br><span class="line">    public MyClassSerializable s1;</span><br><span class="line">    private MyClassSerializable s2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//首先看public MyClass m1，它的类型是MyClass，属于“没有标记[Serializable]属性的类”，不满足类型规则；它的字段是public，满足字段规则；系统要求两条规则同时满足的对象才能序列化，于是它被跳过了。</span><br><span class="line">//接下来看public MyClassSerializable s1，它的类型是MyClassSerializable，属于标记了[Serializable]属性的类，满足类型规则；它的字段是public，满足字段规则；s1同时满足类型规则和字段规则，系统需要对它进行序列化操作。</span><br><span class="line">//序列化是一个递归过程，对s1进行序列化意味着要对s1的所有类成员对象进行序列化判断。所以现在轮到s1中的成员进行规则判断了。</span><br><span class="line">//public float f1，类型float是c#原生数据类型，满足类型规则；字段是public，满足字段规则；判断通过。</span><br><span class="line">//[NonSerialized]public float f2，字段被标记了[NonSerialized]，不满足字段规则。</span><br><span class="line">//private int i1，字段是private，不满足字段规则。</span><br><span class="line">//[SerializeField]private int i2，类型int是c#原生数据类型，满足类型规则；字段被标记了[SerializeField]，满足字段规则；判断通过。</span><br><span class="line">//所以s1中f1和i2通过了规则判断，f2和i1没有通过。所以图中s1.f1和s1.i2保留了原来的值。</span><br><span class="line">//最后我们看private MyClassSerializable s2，这时相信我们都能轻易看出来，private不满足字段规则，s2被跳过。</span><br></pre></td></tr></table></figure>
+<h4 id="热重载-hot-reloading"><a href="#热重载-hot-reloading" class="headerlink" title="热重载(hot-reloading)"></a>热重载(hot-reloading)</h4><p>对Unity中的C#脚本进行修改可以即时编译，不需要重启编辑器就看看到效果，这是Unity编辑器的一个令人称赞的机制。你有没有想过它是怎么实现的呢？答案就是热重载。</p>
+<p>当编辑器检测到代码环境发生变化(脚本被修改、点击播放)时，会对所有现存的编辑器窗口进行热重载序列化。等待环境恢复(编译完成、转换到播放状态)时，编辑器根据之前序列化的值对编辑器窗口进行恢复。</p>
+<p>热重载序列化与标准序列化的不同点是，在进行热重载序列化时，字段规则被忽略，只要被处理对象满足类型规则，那么就对其进行序列化。</p>
+<h4 id="引擎对象的序列化"><a href="#引擎对象的序列化" class="headerlink" title="引擎对象的序列化"></a>引擎对象的序列化</h4><p>UnityEngine.Object及其派生类(比如MonoBehaviour和ScriptableObject)称为Unity引擎对象，它们属于引擎内部资源，在序列化时和其他普通类对象的处理机制上有着较大的区别。</p>
+<p>引擎对象特有的序列化规则如下：</p>
+<ul>
+<li>引擎对象需要单独进行序列化。</li>
+<li>如果别的对象保存着引擎对象的引用，这个对象序列化时只会序列化引擎对象的引用，而不是引擎对象本身。</li>
+<li>引擎对象的类名必须和文件名完全一致。</li>
+</ul>
+<p>于插件开发，我们最可能接触到的引擎对象就是ScriptableObject</p>
+<h4 id="自定义序列化"><a href="#自定义序列化" class="headerlink" title="自定义序列化"></a>自定义序列化</h4><p>Unity为我们提供了ISerializationCallbackReceiver接口，允许我们在序列化前后对数据进行操作。它并不能让系统直接处理你的复杂数据结构，但它给了你机会让你把数据”加工”成为系统能支持的形式</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/03/29/C++变量和基本类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pfjhetg">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pfjhetg">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/29/C++变量和基本类型/" itemprop="url">C++变量和基本类型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-29T23:18:39+08:00">
+                2019-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-Primer/" itemprop="url" rel="index">
+                    <span itemprop="name">C++ Primer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="内置类型的及其实现"><a href="#内置类型的及其实现" class="headerlink" title="内置类型的及其实现"></a>内置类型的及其实现</h4><p>计算机以比特序列存储数据，每个比特非0即1。通常计算机以2的整数次幂个比特作为块来处理内存，可寻址的最小内存块成为“字节（byte）”，存储的基本单元成为“字（word）”。计算机的字节一般是8个比特构成，32位机器的字是32个比特，64位机器的字是64个比特。</p>
+<h4 id="如何选择类型"><a href="#如何选择类型" class="headerlink" title="如何选择类型"></a>如何选择类型</h4><ul>
+<li>明确知道数值不为负数时候，使用无符号类型。</li>
+<li>浮点数使用double，float精度不够（6位），double精度10位；并且他们之间的开销相差无几，某些计算机double运算效率更高。</li>
+</ul>
+<p>赋值给无符号类型一个超出表示范围的值，结果是初始值对无符号类型表示数值综合取模后的余数，反之结果则是未定义，可能会出错崩溃。</p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><h5 id="建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。"><a href="#建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。" class="headerlink" title="建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。"></a>建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。</h5><h5 id="列表初始化"><a href="#列表初始化" class="headerlink" title="列表初始化"></a>列表初始化</h5><p>使用{}初始化的特点是初始化内置类型的变量时候如果初始值存在数据长度不够引起丢失时，编译器会报错</p>
+<h4 id="变量声明合定义关系"><a href="#变量声明合定义关系" class="headerlink" title="变量声明合定义关系"></a>变量声明合定义关系</h4><p>变量前加extern表示声明，否者就是声明，声明可以有多此，定义只能有一次。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> i = <span class="number">0</span></span><br><span class="line">表示声明</span><br></pre></td></tr></table></figure>
+<h4 id="符合类型"><a href="#符合类型" class="headerlink" title="符合类型"></a>符合类型</h4><h5 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h5><p>&amp;d的形式来定义引用，d是变量名。定义引用时候必须初始化。引用只是一个别名，和初始化对象绑定到同一个值。</p>
+<h5 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h5><p>*d的形式定义指针，d是变量名。</p>
+<p>指针存放对象的地址，要想获取该地址，使用<strong>取地址符</strong>（&amp;）：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;i;</span><br></pre></td></tr></table></figure>
+<p>使用<strong>解引用符</strong>（*）来访问指针指向的对象：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; *p; <span class="comment">//输出1</span></span><br></pre></td></tr></table></figure>
+<p>和引用的区别</p>
+<ul>
+<li>指针本身就是一个对象，可以对他拷贝，赋值，可以改变指向的目标。</li>
+<li>指针无需在定义时初始化。</li>
+</ul>
+<h5 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h5><p>建议初始化所有的指针</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">int</span> *p = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> *p = <span class="literal">NULL</span>;<span class="comment">// #include cstilib, 不推荐使用</span></span><br><span class="line">上面三个初始化等价</span><br></pre></td></tr></table></figure>
+<p>if表达式中传入指针表示用指针的值来判断</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>(p) <span class="comment">// p的值是0，结果是false</span></span><br></pre></td></tr></table></figure>
+<h5 id="void-指针"><a href="#void-指针" class="headerlink" title="void * 指针"></a>void * 指针</h5><p>void *指针用于存放任意对象的地址。</p>
+<h5 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">**表示指向指针的指针；***表示指向指针的指针的指针；</span><br></pre></td></tr></table></figure>
+<h5 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h5><h4 id="const限定符"><a href="#const限定符" class="headerlink" title="const限定符"></a>const限定符</h4><p>const必须定义时候初始化。</p>
+<p>const的作用域是本文件，多个文件出现同名的const定义的变量实际上是分别独立的。如果希望共享，在其他文件中使用extern关键之声明一下，同时定义的时候也加上extern关键字（定义的时候加上extern表明这个const在其他地方会被共享）。</p>
+<p>const引用称之为<strong>对常量的引用</strong>,通常被叫做<strong>常量引用</strong>。非const引用无法引用一个const的对象。const指针和const引用类似。</p>
+<p>const引用一个非const对象，可以保证外部无法修改const的值，只能通过非const对象原始变量修改。</p>
+<h5 id="顶层const"><a href="#顶层const" class="headerlink" title="顶层const"></a>顶层const</h5><p>顶层const表示指针本身是常量，底层const表示指针指向的对象是一个常量，更一边的情况是：</p>
+<p>顶层const可以表示任意的对象的常量，底层const则与指针和引用等复合数据类型的基本类型部分有关。（指针类型可以是底层，也可以是顶层），用于声明引用的const都是底层。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/03/15/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pfjhetg">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pfjhetg">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/15/hello-world/" itemprop="url">Hello World</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-15T09:28:55+08:00">
+                2019-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/test/" itemprop="url" rel="index">
+                    <span itemprop="name">test</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/03/08/月球梦/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -417,7 +919,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/02/21/C-泛型约束/">
+    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/02/21/C#泛型约束/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pfjhetg">
@@ -436,7 +938,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/21/C-泛型约束/" itemprop="url">C# 泛型约束</a></h1>
+                <a class="post-title-link" href="/2019/02/21/C#泛型约束/" itemprop="url">C# 泛型约束</a></h1>
         
 
         <div class="post-meta">
@@ -582,156 +1084,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/02/21/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="pfjhetg">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pfjhetg">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/21/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-21T12:24:02+08:00">
-                2019-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/test/" itemprop="url" rel="index">
-                    <span itemprop="name">test</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -778,7 +1130,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -789,7 +1141,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -800,7 +1152,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

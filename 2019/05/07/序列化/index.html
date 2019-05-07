@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Serialized,">
 
 
 
@@ -79,17 +79,21 @@
 
 
 
-<meta name="description" content="国内外 Ping 测试如果国内无法 Ping 国外可以 Ping，那么此 IP 一定是被封了；而如果国内外都可以 Ping，那么此时就无法判断出是否已经被封了，还需要进行下一步端口扫描测试 国内外端口扫描测试后面需要用到机器的 IP 地址和 SSH 连接端口，IP 地址大家都知道，SSH 连接端口默认是 22 端口，如果大家没有手动更改过此端口，那么下文中需要填写 SSH 连接端口时填写 22 即">
+<meta name="description" content="SerializedObject类和SerializedProperty类用于编辑序列化字段，SerializedProperty用来连接SerializedObject和Editor类。 每一个Editor的子类都有一个serializedObject属性，表明这个Editor是一个Inspected。 相关连接  什么是序列化序列化就是将数据结构或对象状态转换成可供Unity保存和随后重建的">
+<meta name="keywords" content="Serialized">
 <meta property="og:type" content="article">
-<meta property="og:title" content="月球梦">
-<meta property="og:url" content="http://pfjhetg.github.iom/2019/03/08/月球梦/index.html">
+<meta property="og:title" content="序列化">
+<meta property="og:url" content="http://pfjhetg.github.iom/2019/05/07/序列化/index.html">
 <meta property="og:site_name" content="pfjhetg">
-<meta property="og:description" content="国内外 Ping 测试如果国内无法 Ping 国外可以 Ping，那么此 IP 一定是被封了；而如果国内外都可以 Ping，那么此时就无法判断出是否已经被封了，还需要进行下一步端口扫描测试 国内外端口扫描测试后面需要用到机器的 IP 地址和 SSH 连接端口，IP 地址大家都知道，SSH 连接端口默认是 22 端口，如果大家没有手动更改过此端口，那么下文中需要填写 SSH 连接端口时填写 22 即">
+<meta property="og:description" content="SerializedObject类和SerializedProperty类用于编辑序列化字段，SerializedProperty用来连接SerializedObject和Editor类。 每一个Editor的子类都有一个serializedObject属性，表明这个Editor是一个Inspected。 相关连接  什么是序列化序列化就是将数据结构或对象状态转换成可供Unity保存和随后重建的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-10T04:50:48.751Z">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-ff29318a8e2fbd0e4a3cb558e18bd85b_hd.png">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-0d7a7204f9b09387dc02e62ed733246e_r.jpg">
+<meta property="og:updated_time" content="2019-05-07T09:14:56.330Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="月球梦">
-<meta name="twitter:description" content="国内外 Ping 测试如果国内无法 Ping 国外可以 Ping，那么此 IP 一定是被封了；而如果国内外都可以 Ping，那么此时就无法判断出是否已经被封了，还需要进行下一步端口扫描测试 国内外端口扫描测试后面需要用到机器的 IP 地址和 SSH 连接端口，IP 地址大家都知道，SSH 连接端口默认是 22 端口，如果大家没有手动更改过此端口，那么下文中需要填写 SSH 连接端口时填写 22 即">
+<meta name="twitter:title" content="序列化">
+<meta name="twitter:description" content="SerializedObject类和SerializedProperty类用于编辑序列化字段，SerializedProperty用来连接SerializedObject和Editor类。 每一个Editor的子类都有一个serializedObject属性，表明这个Editor是一个Inspected。 相关连接  什么是序列化序列化就是将数据结构或对象状态转换成可供Unity保存和随后重建的">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-ff29318a8e2fbd0e4a3cb558e18bd85b_hd.png">
 
 
 
@@ -119,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://pfjhetg.github.iom/2019/03/08/月球梦/">
+  <link rel="canonical" href="http://pfjhetg.github.iom/2019/05/07/序列化/">
 
 
 
 
 
-  <title>月球梦 | pfjhetg</title>
+  <title>序列化 | pfjhetg</title>
   
 
 
@@ -262,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/03/08/月球梦/">
+    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/05/07/序列化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pfjhetg">
@@ -279,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">月球梦</h1>
+          <h1 class="post-title" itemprop="name headline">序列化</h1>
         
 
         <div class="post-meta">
@@ -291,8 +295,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T08:54:37+08:00">
-                2019-03-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-07T14:10:00+08:00">
+                2019-05-07
               </time>
             
 
@@ -314,8 +318,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/categories/Unity3D/" itemprop="url" rel="index">
+                    <span itemprop="name">Unity3D</span>
                   </a>
                 </span>
 
@@ -351,20 +355,44 @@
       
 
       
-        <h4 id="国内外-Ping-测试"><a href="#国内外-Ping-测试" class="headerlink" title="国内外 Ping 测试"></a>国内外 Ping 测试</h4><p>如果国内无法 Ping 国外可以 Ping，那么此 IP 一定是被封了；而如果国内外都可以 Ping，那么此时就无法判断出是否已经被封了，还需要进行下一步端口扫描测试</p>
-<h4 id="国内外端口扫描测试"><a href="#国内外端口扫描测试" class="headerlink" title="国内外端口扫描测试"></a>国内外端口扫描测试</h4><p>后面需要用到机器的 IP 地址和 SSH 连接端口，IP 地址大家都知道，SSH 连接端口默认是 22 端口，如果大家没有手动更改过此端口，那么下文中需要填写 SSH 连接端口时填写 22 即可</p>
+        <blockquote>
+<p>SerializedObject类和SerializedProperty类用于编辑序列化字段，SerializedProperty用来连接SerializedObject和Editor类。</p>
+<p>每一个Editor的子类都有一个serializedObject属性，表明这个Editor是一个Inspected。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/29357313" target="_blank" rel="noopener">相关连接</a></p>
+</blockquote>
+<h4 id="什么是序列化"><a href="#什么是序列化" class="headerlink" title="什么是序列化"></a>什么是序列化</h4><p>序列化就是将数据结构或对象状态转换成可供Unity保存和随后重建的自动化处理过程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“Serialization is the automatic process of transforming data structures or object states into a format that Unity can store and reconstruct later.”</span><br></pre></td></tr></table></figure>
+<p>Unity编辑器在很多时候会自动触发序列化：</p>
 <ul>
-<li><h3 id="国内测试"><a href="#国内测试" class="headerlink" title="国内测试"></a>国内测试</h3><p>国内端口扫描站（<a href="https://www.vultrcn.com/goto/?url=aHR0cDovL2Nvb2xhZi5jb20vdG9vbC9wb3J0" target="_blank" rel="noopener">http://coolaf.com/tool/port</a>），如果端口是关闭则表明IP可能被封。</p>
-</li>
-<li><h3 id="国外测试"><a href="#国外测试" class="headerlink" title="国外测试"></a>国外测试</h3><p>国外端口扫描站（<a href="https://www.vultrcn.com/goto/?url=aHR0cHM6Ly93d3cueW91Z2V0c2lnbmFsLmNvbS90b29scy9vcGVuLXBvcnRzLw==" target="_blank" rel="noopener">https://www.yougetsignal.com/tools/open-ports</a>），如果端口是开启，而在国内测试中是关闭则可以确定IP完全被封了。而如果显示此 SSH 连接端口依旧为关闭状态，那么就检查下机器是不是在正常运行以及端口是否填写错误。</p>
-</li>
+<li>文件的保存/读取，包括Scene、Asset、AssetBundle，以及自定义的ScriptableObject等。</li>
+<li>Inspector窗口</li>
+<li>编辑器重加载脚本脚本</li>
+<li>Prefab和Instantiation</li>
 </ul>
-<h4 id="在-Vultr-VPS-上搭建-Shadowsocks"><a href="#在-Vultr-VPS-上搭建-Shadowsocks" class="headerlink" title="在 Vultr VPS 上搭建 Shadowsocks"></a>在 Vultr VPS 上搭建 Shadowsocks</h4><ul>
-<li><a href="https://zoomyale.com/2016/vultr_and_ss" target="_blank" rel="noopener">相关链接</a></li>
+<h4 id="序列化规则"><a href="#序列化规则" class="headerlink" title="序列化规则"></a>序列化规则</h4><p>序列化规则简单来说有两点，一是类型规则，系统据此判断能不能对对象进行序列化；二是字段规则，系统据此判断该不该对对象进行序列化。当对象同时满足类型规则和字段规则时，系统就会对该对象进行序列化。</p>
+<ul>
+<li>类型规则</li>
 </ul>
-<h5 id="部署-Shadowsocks-服务器端"><a href="#部署-Shadowsocks-服务器端" class="headerlink" title="部署 Shadowsocks 服务器端"></a>部署 Shadowsocks 服务器端</h5><p>以下是3条命令，每次输入一行、回车，等待屏幕上的操作完成后再输入下一条</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh</span><br><span class="line">chmod +x shadowsocks.sh</span><br><span class="line">./shadowsocks.sh 2&gt;&amp;1 | tee shadowsocks.log</span><br></pre></td></tr></table></figure>
-<p>最后一步输完，你应该会看到下图中内容──是要你为 Shadowsocks 服务设置一个个人密码。输好回车后会让你选择一个端口，输入 1-65535 间的数字都行。之后可以选择加密方式，这个就看个人喜好了，默认是 aes-256-gcm。然后就完成。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-ff29318a8e2fbd0e4a3cb558e18bd85b_hd.png" alt="img"></p>
+<ul>
+<li>字段规则</li>
+</ul>
+<p><img src="https://pic3.zhimg.com/v2-0d7a7204f9b09387dc02e62ed733246e_r.jpg" alt="preview"></p>
+<p>编辑器退出前会对所有打开的窗口进行序列化并保存序列化数据到硬盘。在重启编辑器后，序列化系统读入序列化数据，重新生成对应的窗口对象。进行序列化时，只有满足序列化规则的对象的值得以保存，不满足规则的对象则被序列化系统忽略。</p>
+<p>举个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class MyClass &#123;</span><br><span class="line">    public string s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[Serializable]</span><br><span class="line">public class MyClassSerializable &#123;</span><br><span class="line">    public float f1;</span><br><span class="line">    [NonSerialized]public float f2;</span><br><span class="line">    private int i1;</span><br><span class="line">    [SerializeField]private int i2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class SerializationRuleWindow : EditorWindow &#123;</span><br><span class="line">    public MyClass m1;</span><br><span class="line">    public MyClassSerializable s1;</span><br><span class="line">    private MyClassSerializable s2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//首先看public MyClass m1，它的类型是MyClass，属于“没有标记[Serializable]属性的类”，不满足类型规则；它的字段是public，满足字段规则；系统要求两条规则同时满足的对象才能序列化，于是它被跳过了。</span><br><span class="line">//接下来看public MyClassSerializable s1，它的类型是MyClassSerializable，属于标记了[Serializable]属性的类，满足类型规则；它的字段是public，满足字段规则；s1同时满足类型规则和字段规则，系统需要对它进行序列化操作。</span><br><span class="line">//序列化是一个递归过程，对s1进行序列化意味着要对s1的所有类成员对象进行序列化判断。所以现在轮到s1中的成员进行规则判断了。</span><br><span class="line">//public float f1，类型float是c#原生数据类型，满足类型规则；字段是public，满足字段规则；判断通过。</span><br><span class="line">//[NonSerialized]public float f2，字段被标记了[NonSerialized]，不满足字段规则。</span><br><span class="line">//private int i1，字段是private，不满足字段规则。</span><br><span class="line">//[SerializeField]private int i2，类型int是c#原生数据类型，满足类型规则；字段被标记了[SerializeField]，满足字段规则；判断通过。</span><br><span class="line">//所以s1中f1和i2通过了规则判断，f2和i1没有通过。所以图中s1.f1和s1.i2保留了原来的值。</span><br><span class="line">//最后我们看private MyClassSerializable s2，这时相信我们都能轻易看出来，private不满足字段规则，s2被跳过。</span><br></pre></td></tr></table></figure>
+<h4 id="热重载-hot-reloading"><a href="#热重载-hot-reloading" class="headerlink" title="热重载(hot-reloading)"></a>热重载(hot-reloading)</h4><p>对Unity中的C#脚本进行修改可以即时编译，不需要重启编辑器就看看到效果，这是Unity编辑器的一个令人称赞的机制。你有没有想过它是怎么实现的呢？答案就是热重载。</p>
+<p>当编辑器检测到代码环境发生变化(脚本被修改、点击播放)时，会对所有现存的编辑器窗口进行热重载序列化。等待环境恢复(编译完成、转换到播放状态)时，编辑器根据之前序列化的值对编辑器窗口进行恢复。</p>
+<p>热重载序列化与标准序列化的不同点是，在进行热重载序列化时，字段规则被忽略，只要被处理对象满足类型规则，那么就对其进行序列化。</p>
+<h4 id="引擎对象的序列化"><a href="#引擎对象的序列化" class="headerlink" title="引擎对象的序列化"></a>引擎对象的序列化</h4><p>UnityEngine.Object及其派生类(比如MonoBehaviour和ScriptableObject)称为Unity引擎对象，它们属于引擎内部资源，在序列化时和其他普通类对象的处理机制上有着较大的区别。</p>
+<p>引擎对象特有的序列化规则如下：</p>
+<ul>
+<li>引擎对象需要单独进行序列化。</li>
+<li>如果别的对象保存着引擎对象的引用，这个对象序列化时只会序列化引擎对象的引用，而不是引擎对象本身。</li>
+<li>引擎对象的类名必须和文件名完全一致。</li>
+</ul>
+<p>于插件开发，我们最可能接触到的引擎对象就是ScriptableObject</p>
+<h4 id="自定义序列化"><a href="#自定义序列化" class="headerlink" title="自定义序列化"></a>自定义序列化</h4><p>Unity为我们提供了ISerializationCallbackReceiver接口，允许我们在序列化前后对数据进行操作。它并不能让系统直接处理你的复杂数据结构，但它给了你机会让你把数据”加工”成为系统能支持的形式</p>
 
       
     </div>
@@ -380,6 +408,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Serialized/" rel="tag"># Serialized</a>
+          
+        </div>
+      
 
       
       
@@ -389,8 +423,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/21/C#泛型约束/" rel="next" title="C# 泛型约束">
-                <i class="fa fa-chevron-left"></i> C# 泛型约束
+              <a href="/2019/03/29/C++变量和基本类型/" rel="next" title="C++变量和基本类型">
+                <i class="fa fa-chevron-left"></i> C++变量和基本类型
               </a>
             
           </div>
@@ -398,10 +432,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/15/hello-world/" rel="prev" title="Hello World">
-                Hello World <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -543,7 +573,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#国内外-Ping-测试"><span class="nav-number">1.</span> <span class="nav-text">国内外 Ping 测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#国内外端口扫描测试"><span class="nav-number">2.</span> <span class="nav-text">国内外端口扫描测试</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#国内测试"><span class="nav-number"></span> <span class="nav-text">国内测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#国外测试"><span class="nav-number"></span> <span class="nav-text">国外测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在-Vultr-VPS-上搭建-Shadowsocks"><span class="nav-number">1.</span> <span class="nav-text">在 Vultr VPS 上搭建 Shadowsocks</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#部署-Shadowsocks-服务器端"><span class="nav-number">1.1.</span> <span class="nav-text">部署 Shadowsocks 服务器端</span></a></li></ol></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是序列化"><span class="nav-number">1.</span> <span class="nav-text">什么是序列化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#序列化规则"><span class="nav-number">2.</span> <span class="nav-text">序列化规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#热重载-hot-reloading"><span class="nav-number">3.</span> <span class="nav-text">热重载(hot-reloading)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引擎对象的序列化"><span class="nav-number">4.</span> <span class="nav-text">引擎对象的序列化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义序列化"><span class="nav-number">5.</span> <span class="nav-text">自定义序列化</span></a></li></ol></div>
             
 
           </div>

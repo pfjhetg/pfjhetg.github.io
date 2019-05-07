@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="内置类型的及其实现计算机以比特序列存储数据，每个比特非0即1。通常计算机以2的整数次幂个比特作为块来处理内存，可寻址的最小内存块成为“字节（byte）”，存储的基本单元成为“字（word）”。计算机的字节一般是8个比特构成，32位机器的字是32个比特，64位机器的字是64个比特。 如何选择类型 明确知道数值不为负数时候，使用无符号类型。 浮点数使用double，float精度不够（6位），doub">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++变量和基本类型">
+<meta property="og:url" content="http://pfjhetg.github.iom/2019/03/29/C++变量和基本类型/index.html">
+<meta property="og:site_name" content="pfjhetg">
+<meta property="og:description" content="内置类型的及其实现计算机以比特序列存储数据，每个比特非0即1。通常计算机以2的整数次幂个比特作为块来处理内存，可寻址的最小内存块成为“字节（byte）”，存储的基本单元成为“字（word）”。计算机的字节一般是8个比特构成，32位机器的字是32个比特，64位机器的字是64个比特。 如何选择类型 明确知道数值不为负数时候，使用无符号类型。 浮点数使用double，float精度不够（6位），doub">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-07T05:42:40.893Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++变量和基本类型">
+<meta name="twitter:description" content="内置类型的及其实现计算机以比特序列存储数据，每个比特非0即1。通常计算机以2的整数次幂个比特作为块来处理内存，可寻址的最小内存块成为“字节（byte）”，存储的基本单元成为“字（word）”。计算机的字节一般是8个比特构成，32位机器的字是32个比特，64位机器的字是64个比特。 如何选择类型 明确知道数值不为负数时候，使用无符号类型。 浮点数使用double，float精度不够（6位），doub">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pfjhetg.github.iom/2019/03/29/C++变量和基本类型/">
+
+
+
+
+
+  <title>C++变量和基本类型 | pfjhetg</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">pfjhetg</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/03/29/C++变量和基本类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pfjhetg">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pfjhetg">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++变量和基本类型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-29T23:18:39+08:00">
+                2019-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-Primer/" itemprop="url" rel="index">
+                    <span itemprop="name">C++ Primer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="内置类型的及其实现"><a href="#内置类型的及其实现" class="headerlink" title="内置类型的及其实现"></a>内置类型的及其实现</h4><p>计算机以比特序列存储数据，每个比特非0即1。通常计算机以2的整数次幂个比特作为块来处理内存，可寻址的最小内存块成为“字节（byte）”，存储的基本单元成为“字（word）”。计算机的字节一般是8个比特构成，32位机器的字是32个比特，64位机器的字是64个比特。</p>
+<h4 id="如何选择类型"><a href="#如何选择类型" class="headerlink" title="如何选择类型"></a>如何选择类型</h4><ul>
+<li>明确知道数值不为负数时候，使用无符号类型。</li>
+<li>浮点数使用double，float精度不够（6位），double精度10位；并且他们之间的开销相差无几，某些计算机double运算效率更高。</li>
+</ul>
+<p>赋值给无符号类型一个超出表示范围的值，结果是初始值对无符号类型表示数值综合取模后的余数，反之结果则是未定义，可能会出错崩溃。</p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><h5 id="建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。"><a href="#建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。" class="headerlink" title="建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。"></a>建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。</h5><h5 id="列表初始化"><a href="#列表初始化" class="headerlink" title="列表初始化"></a>列表初始化</h5><p>使用{}初始化的特点是初始化内置类型的变量时候如果初始值存在数据长度不够引起丢失时，编译器会报错</p>
+<h4 id="变量声明合定义关系"><a href="#变量声明合定义关系" class="headerlink" title="变量声明合定义关系"></a>变量声明合定义关系</h4><p>变量前加extern表示声明，否者就是声明，声明可以有多此，定义只能有一次。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> i = <span class="number">0</span></span><br><span class="line">表示声明</span><br></pre></td></tr></table></figure>
+<h4 id="符合类型"><a href="#符合类型" class="headerlink" title="符合类型"></a>符合类型</h4><h5 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h5><p>&amp;d的形式来定义引用，d是变量名。定义引用时候必须初始化。引用只是一个别名，和初始化对象绑定到同一个值。</p>
+<h5 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h5><p>*d的形式定义指针，d是变量名。</p>
+<p>指针存放对象的地址，要想获取该地址，使用<strong>取地址符</strong>（&amp;）：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;i;</span><br></pre></td></tr></table></figure>
+<p>使用<strong>解引用符</strong>（*）来访问指针指向的对象：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; *p; <span class="comment">//输出1</span></span><br></pre></td></tr></table></figure>
+<p>和引用的区别</p>
+<ul>
+<li>指针本身就是一个对象，可以对他拷贝，赋值，可以改变指向的目标。</li>
+<li>指针无需在定义时初始化。</li>
+</ul>
+<h5 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h5><p>建议初始化所有的指针</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">int</span> *p = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> *p = <span class="literal">NULL</span>;<span class="comment">// #include cstilib, 不推荐使用</span></span><br><span class="line">上面三个初始化等价</span><br></pre></td></tr></table></figure>
+<p>if表达式中传入指针表示用指针的值来判断</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>(p) <span class="comment">// p的值是0，结果是false</span></span><br></pre></td></tr></table></figure>
+<h5 id="void-指针"><a href="#void-指针" class="headerlink" title="void * 指针"></a>void * 指针</h5><p>void *指针用于存放任意对象的地址。</p>
+<h5 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">**表示指向指针的指针；***表示指向指针的指针的指针；</span><br></pre></td></tr></table></figure>
+<h5 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h5><h4 id="const限定符"><a href="#const限定符" class="headerlink" title="const限定符"></a>const限定符</h4><p>const必须定义时候初始化。</p>
+<p>const的作用域是本文件，多个文件出现同名的const定义的变量实际上是分别独立的。如果希望共享，在其他文件中使用extern关键之声明一下，同时定义的时候也加上extern关键字（定义的时候加上extern表明这个const在其他地方会被共享）。</p>
+<p>const引用称之为<strong>对常量的引用</strong>,通常被叫做<strong>常量引用</strong>。非const引用无法引用一个const的对象。const指针和const引用类似。</p>
+<p>const引用一个非const对象，可以保证外部无法修改const的值，只能通过非const对象原始变量修改。</p>
+<h5 id="顶层const"><a href="#顶层const" class="headerlink" title="顶层const"></a>顶层const</h5><p>顶层const表示指针本身是常量，底层const表示指针指向的对象是一个常量，更一边的情况是：</p>
+<p>顶层const可以表示任意的对象的常量，底层const则与指针和引用等复合数据类型的基本类型部分有关。（指针类型可以是底层，也可以是顶层），用于声明引用的const都是底层。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/15/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/07/序列化/" rel="prev" title="序列化">
+                序列化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">pfjhetg</p>
+              <p class="site-description motion-element" itemprop="description">蹇胜的博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pfjhetg" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#内置类型的及其实现"><span class="nav-number">1.</span> <span class="nav-text">内置类型的及其实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何选择类型"><span class="nav-number">2.</span> <span class="nav-text">如何选择类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化"><span class="nav-number">3.</span> <span class="nav-text">初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。"><span class="nav-number">3.1.</span> <span class="nav-text">建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列表初始化"><span class="nav-number">3.2.</span> <span class="nav-text">列表初始化</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量声明合定义关系"><span class="nav-number">4.</span> <span class="nav-text">变量声明合定义关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#符合类型"><span class="nav-number">5.</span> <span class="nav-text">符合类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#引用"><span class="nav-number">5.1.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指针"><span class="nav-number">5.2.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#空指针"><span class="nav-number">5.3.</span> <span class="nav-text">空指针</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#void-指针"><span class="nav-number">5.4.</span> <span class="nav-text">void * 指针</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指向指针的指针"><span class="nav-number">5.5.</span> <span class="nav-text">指向指针的指针</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指向指针的引用"><span class="nav-number">5.6.</span> <span class="nav-text">指向指针的引用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#const限定符"><span class="nav-number">6.</span> <span class="nav-text">const限定符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#顶层const"><span class="nav-number">6.1.</span> <span class="nav-text">顶层const</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pfjhetg</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
