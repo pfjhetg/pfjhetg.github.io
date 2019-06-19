@@ -79,16 +79,17 @@
 
 
 
-<meta name="description" content="蹇胜的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="pfjhetg">
-<meta property="og:url" content="http://pfjhetg.github.iom/archives/2019/index.html">
+<meta name="description" content="在泛型类型定义之后（类中或者方法中）使用 where 约束泛型类型，使用方式类似继承的语法。 可以直接参考微软的类型参数的约束（C#编程指南）    约束 说明     where T: struct 类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见使用可以为 null 的类型（C# 编程指南）。   where T : class 类型参数必须是引用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# 泛型约束">
+<meta property="og:url" content="http://pfjhetg.github.iom/2019/03/21/C # 泛型约束/index.html">
 <meta property="og:site_name" content="pfjhetg">
-<meta property="og:description" content="蹇胜的博客">
+<meta property="og:description" content="在泛型类型定义之后（类中或者方法中）使用 where 约束泛型类型，使用方式类似继承的语法。 可以直接参考微软的类型参数的约束（C#编程指南）    约束 说明     where T: struct 类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见使用可以为 null 的类型（C# 编程指南）。   where T : class 类型参数必须是引用">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-19T02:18:59.194Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pfjhetg">
-<meta name="twitter:description" content="蹇胜的博客">
+<meta name="twitter:title" content="C# 泛型约束">
+<meta name="twitter:description" content="在泛型类型定义之后（类中或者方法中）使用 where 约束泛型类型，使用方式类似继承的语法。 可以直接参考微软的类型参数的约束（C#编程指南）    约束 说明     where T: struct 类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见使用可以为 null 的类型（C# 编程指南）。   where T : class 类型参数必须是引用">
 
 
 
@@ -118,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://pfjhetg.github.iom/archives/2019/">
+  <link rel="canonical" href="http://pfjhetg.github.iom/2019/03/21/C # 泛型约束/">
 
 
 
 
 
-  <title>Archive | pfjhetg</title>
+  <title>C# 泛型约束 | pfjhetg</title>
   
 
 
@@ -143,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -237,247 +238,203 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/03/21/C # 泛型约束/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pfjhetg">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pfjhetg">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">C# 泛型约束</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-21T00:00:00+08:00">
+                2019-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        Um..! 6 posts in total. Keep on posting.
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C#</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/11/C # Attribute/" itemprop="url">
-              
-                <span itemprop="name">C# Attribute</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-11T00:00:00+08:00" content="2019-05-11">
-          05-11
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/07/序列化/" itemprop="url">
-              
-                <span itemprop="name">序列化</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-07T00:00:00+08:00" content="2019-05-07">
-          05-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/08/穿透测试/" itemprop="url">
-              
-                <span itemprop="name">穿透测试</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-08T00:00:00+08:00" content="2019-04-08">
-          04-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>在泛型类型定义之后（类中或者方法中）使用 <code>where</code> 约束泛型类型，使用方式类似继承的语法。</p>
+<p>可以直接参考微软的<a href="https://msdn.microsoft.com/zh-cn/library/d5x73970.aspx" target="_blank" rel="noopener">类型参数的约束（C#编程指南）</a></p>
+<table>
+<thead>
+<tr>
+<th>约束</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>where T: struct</td>
+<td style="text-align:left">类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见<a href="https://msdn.microsoft.com/zh-cn/library/2cf62fcy.aspx" target="_blank" rel="noopener">使用可以为 null 的类型（C# 编程指南）</a>。</td>
+</tr>
+<tr>
+<td>where T : class</td>
+<td style="text-align:left">类型参数必须是引用类型；这一点也适用于任何类、接口、委托或数组类型。</td>
+</tr>
+<tr>
+<td>where T : new()</td>
+<td style="text-align:left">类型参数必须具有无参数的公共构造函数。 当与其他约束一起使用时，new() 约束必须最后指定。</td>
+</tr>
+<tr>
+<td>where T : &lt;base class name&gt;</td>
+<td style="text-align:left">类型参数必须是指定的基类或派生自指定的基类。</td>
+</tr>
+<tr>
+<td>where T : &lt;interface name&gt;</td>
+<td style="text-align:left">类型参数必须是指定的接口或实现指定的接口。 可以指定多个接口约束。 约束接口也可以是泛型的。</td>
+</tr>
+<tr>
+<td>where T : U</td>
+<td style="text-align:left">为 T 提供的类型参数必须是为 U 提供的参数或派生自为 U 提供的参数。</td>
+</tr>
+</tbody>
+</table>
+<p>这几个可以混合使用，比如where T : class, new(); where T : class1,  calss2;等</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/29/C++变量和基本类型/" itemprop="url">
-              
-                <span itemprop="name">C++变量和基本类型</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-29T23:18:39+08:00" content="2019-03-29">
-          03-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/21/C # 泛型约束/" itemprop="url">
-              
-                <span itemprop="name">C# 泛型约束</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-21T00:00:00+08:00" content="2019-03-21">
-          03-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/15/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-15T09:28:55+08:00" content="2019-03-15">
-          03-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/15/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/29/C++变量和基本类型/" rel="prev" title="C++变量和基本类型">
+                C++变量和基本类型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -485,6 +442,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -694,6 +655,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
