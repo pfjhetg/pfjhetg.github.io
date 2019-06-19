@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="pfjhetg">
 <meta property="og:description" content="国内外 Ping 测试如果国内无法 Ping 国外可以 Ping，那么此 IP 一定是被封了；而如果国内外都可以 Ping，那么此时就无法判断出是否已经被封了，还需要进行下一步端口扫描测试 国内外端口扫描测试后面需要用到机器的 IP 地址和 SSH 连接端口，IP 地址大家都知道，SSH 连接端口默认是 22 端口，如果大家没有手动更改过此端口，那么下文中需要填写 SSH 连接端口时填写 22 即">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-19T02:18:17.513Z">
+<meta property="og:updated_time" content="2019-06-19T03:15:52.106Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="穿透测试">
 <meta name="twitter:description" content="国内外 Ping 测试如果国内无法 Ping 国外可以 Ping，那么此 IP 一定是被封了；而如果国内外都可以 Ping，那么此时就无法判断出是否已经被封了，还需要进行下一步端口扫描测试 国内外端口扫描测试后面需要用到机器的 IP 地址和 SSH 连接端口，IP 地址大家都知道，SSH 连接端口默认是 22 端口，如果大家没有手动更改过此端口，那么下文中需要填写 SSH 连接端口时填写 22 即">
@@ -353,7 +353,7 @@
 <li><a href="https://zoomyale.com/2016/vultr_and_ss" target="_blank" rel="noopener">相关链接</a></li>
 </ul>
 <h5 id="部署-Shadowsocks-服务器端"><a href="#部署-Shadowsocks-服务器端" class="headerlink" title="部署 Shadowsocks 服务器端"></a>部署 Shadowsocks 服务器端</h5><p>以下是3条命令，每次输入一行、回车，等待屏幕上的操作完成后再输入下一条</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh</span><br><span class="line">chmod +x shadowsocks.sh</span><br><span class="line">./shadowsocks.sh 2&gt;&amp;1 | tee shadowsocks.log</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https:<span class="comment">//raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh</span></span><br><span class="line">chmod +x shadowsocks.sh</span><br><span class="line">./shadowsocks.sh <span class="number">2</span>&gt;&amp;<span class="number">1</span> | tee shadowsocks.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
 <p>最后一步输完，你应该会看到下图中内容──是要你为 Shadowsocks 服务设置一个个人密码。输好回车后会让你选择一个端口，输入 1-65535 间的数字都行。之后可以选择加密方式，这个就看个人喜好了，默认是 aes-256-gcm。然后就完成。</p>
 
       
