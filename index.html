@@ -473,6 +473,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/04/08/穿透测试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pfjhetg">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pfjhetg">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/08/穿透测试/" itemprop="url">穿透测试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-08T00:00:00+08:00">
+                2019-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="国内外-Ping-测试"><a href="#国内外-Ping-测试" class="headerlink" title="国内外 Ping 测试"></a>国内外 Ping 测试</h4><p>如果国内无法 Ping 国外可以 Ping，那么此 IP 一定是被封了；而如果国内外都可以 Ping，那么此时就无法判断出是否已经被封了，还需要进行下一步端口扫描测试</p>
+<h4 id="国内外端口扫描测试"><a href="#国内外端口扫描测试" class="headerlink" title="国内外端口扫描测试"></a>国内外端口扫描测试</h4><p>后面需要用到机器的 IP 地址和 SSH 连接端口，IP 地址大家都知道，SSH 连接端口默认是 22 端口，如果大家没有手动更改过此端口，那么下文中需要填写 SSH 连接端口时填写 22 即可</p>
+<ul>
+<li><h3 id="国内测试"><a href="#国内测试" class="headerlink" title="国内测试"></a>国内测试</h3><p>国内端口扫描站（<a href="https://www.vultrcn.com/goto/?url=aHR0cDovL2Nvb2xhZi5jb20vdG9vbC9wb3J0" target="_blank" rel="noopener">http://coolaf.com/tool/port</a>），如果端口是关闭则表明IP可能被封。</p>
+</li>
+<li><h3 id="国外测试"><a href="#国外测试" class="headerlink" title="国外测试"></a>国外测试</h3><p>国外端口扫描站（<a href="https://www.vultrcn.com/goto/?url=aHR0cHM6Ly93d3cueW91Z2V0c2lnbmFsLmNvbS90b29scy9vcGVuLXBvcnRzLw==" target="_blank" rel="noopener">https://www.yougetsignal.com/tools/open-ports</a>），如果端口是开启，而在国内测试中是关闭则可以确定IP完全被封了。而如果显示此 SSH 连接端口依旧为关闭状态，那么就检查下机器是不是在正常运行以及端口是否填写错误。</p>
+</li>
+</ul>
+<h4 id="在-Vultr-VPS-上搭建-Shadowsocks"><a href="#在-Vultr-VPS-上搭建-Shadowsocks" class="headerlink" title="在 Vultr VPS 上搭建 Shadowsocks"></a>在 Vultr VPS 上搭建 Shadowsocks</h4><ul>
+<li><a href="https://zoomyale.com/2016/vultr_and_ss" target="_blank" rel="noopener">相关链接</a></li>
+</ul>
+<h5 id="部署-Shadowsocks-服务器端"><a href="#部署-Shadowsocks-服务器端" class="headerlink" title="部署 Shadowsocks 服务器端"></a>部署 Shadowsocks 服务器端</h5><p>以下是3条命令，每次输入一行、回车，等待屏幕上的操作完成后再输入下一条</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh</span><br><span class="line">chmod +x shadowsocks.sh</span><br><span class="line">./shadowsocks.sh 2&gt;&amp;1 | tee shadowsocks.log</span><br></pre></td></tr></table></figure>
+<p>最后一步输完，你应该会看到下图中内容──是要你为 Shadowsocks 服务设置一个个人密码。输好回车后会让你选择一个端口，输入 1-65535 间的数字都行。之后可以选择加密方式，这个就看个人喜好了，默认是 aes-256-gcm。然后就完成。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/03/29/C++变量和基本类型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -646,6 +801,184 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/03/21/C# 泛型约束/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pfjhetg">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pfjhetg">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/21/C# 泛型约束/" itemprop="url">C# 泛型约束</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-21T00:00:00+08:00">
+                2019-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C#</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在泛型类型定义之后（类中或者方法中）使用 <code>where</code> 约束泛型类型，使用方式类似继承的语法。</p>
+<p>可以直接参考微软的<a href="https://msdn.microsoft.com/zh-cn/library/d5x73970.aspx" target="_blank" rel="noopener">类型参数的约束（C#编程指南）</a></p>
+<table>
+<thead>
+<tr>
+<th>约束</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>where T: struct</td>
+<td style="text-align:left">类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见<a href="https://msdn.microsoft.com/zh-cn/library/2cf62fcy.aspx" target="_blank" rel="noopener">使用可以为 null 的类型（C# 编程指南）</a>。</td>
+</tr>
+<tr>
+<td>where T : class</td>
+<td style="text-align:left">类型参数必须是引用类型；这一点也适用于任何类、接口、委托或数组类型。</td>
+</tr>
+<tr>
+<td>where T : new()</td>
+<td style="text-align:left">类型参数必须具有无参数的公共构造函数。 当与其他约束一起使用时，new() 约束必须最后指定。</td>
+</tr>
+<tr>
+<td>where T : &lt;base class name&gt;</td>
+<td style="text-align:left">类型参数必须是指定的基类或派生自指定的基类。</td>
+</tr>
+<tr>
+<td>where T : &lt;interface name&gt;</td>
+<td style="text-align:left">类型参数必须是指定的接口或实现指定的接口。 可以指定多个接口约束。 约束接口也可以是泛型的。</td>
+</tr>
+<tr>
+<td>where T : U</td>
+<td style="text-align:left">为 T 提供的类型参数必须是为 U 提供的参数或派生自为 U 提供的参数。</td>
+</tr>
+</tbody>
+</table>
+<p>这几个可以混合使用，比如where T : class, new(); where T : class1,  calss2;等</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/03/15/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -748,339 +1081,6 @@
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/03/08/穿透测试/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="pfjhetg">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pfjhetg">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/08/穿透测试/" itemprop="url">穿透测试</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T00:00:00+08:00">
-                2019-03-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="国内外-Ping-测试"><a href="#国内外-Ping-测试" class="headerlink" title="国内外 Ping 测试"></a>国内外 Ping 测试</h4><p>如果国内无法 Ping 国外可以 Ping，那么此 IP 一定是被封了；而如果国内外都可以 Ping，那么此时就无法判断出是否已经被封了，还需要进行下一步端口扫描测试</p>
-<h4 id="国内外端口扫描测试"><a href="#国内外端口扫描测试" class="headerlink" title="国内外端口扫描测试"></a>国内外端口扫描测试</h4><p>后面需要用到机器的 IP 地址和 SSH 连接端口，IP 地址大家都知道，SSH 连接端口默认是 22 端口，如果大家没有手动更改过此端口，那么下文中需要填写 SSH 连接端口时填写 22 即可</p>
-<ul>
-<li><h3 id="国内测试"><a href="#国内测试" class="headerlink" title="国内测试"></a>国内测试</h3><p>国内端口扫描站（<a href="https://www.vultrcn.com/goto/?url=aHR0cDovL2Nvb2xhZi5jb20vdG9vbC9wb3J0" target="_blank" rel="noopener">http://coolaf.com/tool/port</a>），如果端口是关闭则表明IP可能被封。</p>
-</li>
-<li><h3 id="国外测试"><a href="#国外测试" class="headerlink" title="国外测试"></a>国外测试</h3><p>国外端口扫描站（<a href="https://www.vultrcn.com/goto/?url=aHR0cHM6Ly93d3cueW91Z2V0c2lnbmFsLmNvbS90b29scy9vcGVuLXBvcnRzLw==" target="_blank" rel="noopener">https://www.yougetsignal.com/tools/open-ports</a>），如果端口是开启，而在国内测试中是关闭则可以确定IP完全被封了。而如果显示此 SSH 连接端口依旧为关闭状态，那么就检查下机器是不是在正常运行以及端口是否填写错误。</p>
-</li>
-</ul>
-<h4 id="在-Vultr-VPS-上搭建-Shadowsocks"><a href="#在-Vultr-VPS-上搭建-Shadowsocks" class="headerlink" title="在 Vultr VPS 上搭建 Shadowsocks"></a>在 Vultr VPS 上搭建 Shadowsocks</h4><ul>
-<li><a href="https://zoomyale.com/2016/vultr_and_ss" target="_blank" rel="noopener">相关链接</a></li>
-</ul>
-<h5 id="部署-Shadowsocks-服务器端"><a href="#部署-Shadowsocks-服务器端" class="headerlink" title="部署 Shadowsocks 服务器端"></a>部署 Shadowsocks 服务器端</h5><p>以下是3条命令，每次输入一行、回车，等待屏幕上的操作完成后再输入下一条</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh</span><br><span class="line">chmod +x shadowsocks.sh</span><br><span class="line">./shadowsocks.sh 2&gt;&amp;1 | tee shadowsocks.log</span><br></pre></td></tr></table></figure>
-<p>最后一步输完，你应该会看到下图中内容──是要你为 Shadowsocks 服务设置一个个人密码。输好回车后会让你选择一个端口，输入 1-65535 间的数字都行。之后可以选择加密方式，这个就看个人喜好了，默认是 aes-256-gcm。然后就完成。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.iom/2019/02/21/C# 泛型约束/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="pfjhetg">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pfjhetg">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/21/C# 泛型约束/" itemprop="url">C# 泛型约束</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-21T00:00:00+08:00">
-                2019-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C#</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在泛型类型定义之后（类中或者方法中）使用 <code>where</code> 约束泛型类型，使用方式类似继承的语法。</p>
-<p>可以直接参考微软的<a href="https://msdn.microsoft.com/zh-cn/library/d5x73970.aspx" target="_blank" rel="noopener">类型参数的约束（C#编程指南）</a></p>
-<table>
-<thead>
-<tr>
-<th>约束</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>where T: struct</td>
-<td style="text-align:left">类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见<a href="https://msdn.microsoft.com/zh-cn/library/2cf62fcy.aspx" target="_blank" rel="noopener">使用可以为 null 的类型（C# 编程指南）</a>。</td>
-</tr>
-<tr>
-<td>where T : class</td>
-<td style="text-align:left">类型参数必须是引用类型；这一点也适用于任何类、接口、委托或数组类型。</td>
-</tr>
-<tr>
-<td>where T : new()</td>
-<td style="text-align:left">类型参数必须具有无参数的公共构造函数。 当与其他约束一起使用时，new() 约束必须最后指定。</td>
-</tr>
-<tr>
-<td>where T : &lt;base class name&gt;</td>
-<td style="text-align:left">类型参数必须是指定的基类或派生自指定的基类。</td>
-</tr>
-<tr>
-<td>where T : &lt;interface name&gt;</td>
-<td style="text-align:left">类型参数必须是指定的接口或实现指定的接口。 可以指定多个接口约束。 约束接口也可以是泛型的。</td>
-</tr>
-<tr>
-<td>where T : U</td>
-<td style="text-align:left">为 T 提供的类型参数必须是为 U 提供的参数或派生自为 U 提供的参数。</td>
-</tr>
-</tbody>
-</table>
-<p>这几个可以混合使用，比如where T : class, new(); where T : class1,  calss2;等</p>
 
           
         
