@@ -728,21 +728,24 @@
             <h4 id="国内外-Ping-测试"><a href="#国内外-Ping-测试" class="headerlink" title="国内外 Ping 测试"></a>国内外 Ping 测试</h4><p>如果国内无法 Ping 国外可以 Ping，那么此 IP 一定是被封了；而如果国内外都可以 Ping，那么此时就无法判断出是否已经被封了，还需要进行下一步端口扫描测试</p>
 <h4 id="国内外端口扫描测试"><a href="#国内外端口扫描测试" class="headerlink" title="国内外端口扫描测试"></a>国内外端口扫描测试</h4><p>后面需要用到机器的 IP 地址和 SSH 连接端口，IP 地址大家都知道，SSH 连接端口默认是 22 端口，如果大家没有手动更改过此端口，那么下文中需要填写 SSH 连接端口时填写 22 即可</p>
 <ul>
-<li><h3 id="国内测试"><a href="#国内测试" class="headerlink" title="国内测试"></a>国内测试</h3><p>国内端口扫描站<a href>https://www.qtool.net/port</a>，如果端口是关闭则表明IP可能被封。</p>
+<li><h3 id="国内测试"><a href="#国内测试" class="headerlink" title="国内测试"></a>国内测试</h3><p><a href="https://www.qtool.net/port" target="_blank" rel="noopener">国内端口扫描站</a>，如果端口是关闭则表明IP可能被封。</p>
 </li>
-<li><h3 id="国外测试"><a href="#国外测试" class="headerlink" title="国外测试"></a>国外测试</h3><p>国外端口扫描站<a href>https://www.yougetsignal.com/tools/open-ports</a>，如果端口是开启，而在国内测试中是关闭则可以确定IP完全被封了。而如果显示此 SSH 连接端口依旧为关闭状态，那么就检查下机器是不是在正常运行以及端口是否填写错误。</p>
+<li><h3 id="国外测试"><a href="#国外测试" class="headerlink" title="国外测试"></a>国外测试</h3><p><a href="https://www.yougetsignal.com/tools/open-ports" target="_blank" rel="noopener">国外端口扫描站</a>，如果端口是开启，而在国内测试中是关闭则可以确定IP完全被封了。而如果显示此 SSH 连接端口依旧为关闭状态，那么就检查下机器是不是在正常运行以及端口是否填写错误。</p>
 </li>
 </ul>
 <h4 id="在-Vultr-VPS-上搭建-Shadowsocks"><a href="#在-Vultr-VPS-上搭建-Shadowsocks" class="headerlink" title="在 Vultr VPS 上搭建 Shadowsocks"></a>在 Vultr VPS 上搭建 Shadowsocks</h4><ul>
-<li>登录SSH</li>
+<li><p><a href="https://zoomyale.com/2016/vultr_and_ss" target="_blank" rel="noopener">相关链接</a></p>
+</li>
+<li><p>登录SSH</p>
+</li>
 </ul>
-<p><img src="D:\WorkSpace\Blog\source\_posts\assets\1562897244109.png" alt="1562897244109"></p>
-<ul>
-<li><a href="https://zoomyale.com/2016/vultr_and_ss" target="_blank" rel="noopener">相关链接</a></li>
-</ul>
-<h5 id="部署-Shadowsocks-服务器端"><a href="#部署-Shadowsocks-服务器端" class="headerlink" title="部署 Shadowsocks 服务器端"></a>部署 Shadowsocks 服务器端</h5><p>以下是3条命令，每次输入一行、回车，等待屏幕上的操作完成后再输入下一条</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https:<span class="comment">//raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh</span></span><br><span class="line">chmod +x shadowsocks.sh</span><br><span class="line">./shadowsocks.sh <span class="number">2</span>&gt;&amp;<span class="number">1</span> | tee shadowsocks.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
-<p>最后一步输完，你应该会看到下图中内容──是要你为 Shadowsocks 服务设置一个个人密码。输好回车后会让你选择一个端口，输入 1-65535 间的数字都行。之后可以选择加密方式，这个就看个人喜好了，默认是 aes-256-gcm。然后就完成。</p>
+<p><img src=".\assets\1562897244109.png" alt="1562897244109"></p>
+<h5 id="部署-Shadowsocks-服务器端"><a href="#部署-Shadowsocks-服务器端" class="headerlink" title="部署 Shadowsocks 服务器端"></a>部署 Shadowsocks 服务器端</h5><ol>
+<li>以下是3条命令，每次输入一行、回车，等待屏幕上的操作完成后再输入下一条</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一行</span></span><br><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https:<span class="comment">//raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span></span><br><span class="line"><span class="comment">// 第二行</span></span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line"><span class="comment">// 第三行</span></span><br><span class="line">./shadowsocks-all.sh <span class="number">2</span>&gt;&amp;<span class="number">1</span> | tee shadowsocks-all.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<h4 id="加速"><a href="#加速" class="headerlink" title="加速"></a>加速</h4><p><a href="https://zhuanlan.zhihu.com/p/36750024" target="_blank" rel="noopener">链接1</a></p>
+<p><a href="https://www.jianshu.com/p/52815c34215e" target="_blank" rel="noopener">链接2</a></p>
 
           
         
