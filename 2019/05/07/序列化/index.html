@@ -6,7 +6,7 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -348,6 +348,7 @@
 </blockquote>
 <h4 id="什么是序列化"><a href="#什么是序列化" class="headerlink" title="什么是序列化"></a>什么是序列化</h4><p>序列化就是将数据结构或对象状态转换成可供Unity保存和随后重建的自动化处理过程</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“Serialization is the automatic process of transforming data structures or object states into a format that Unity can store and reconstruct later.”</span><br></pre></td></tr></table></figure>
+
 <p>Unity编辑器在很多时候会自动触发序列化：</p>
 <ul>
 <li>文件的保存/读取，包括Scene、Asset、AssetBundle，以及自定义的ScriptableObject等。</li>
@@ -360,55 +361,52 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:center">能序列化的类型</th>
-<th style="text-align:center">不能序列化的类型</th>
+<th align="center">能序列化的类型</th>
+<th align="center">不能序列化的类型</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">c#原生数据类型（int/string/enum…）</td>
-<td style="text-align:center">抽象类</td>
+<tbody><tr>
+<td align="center">c#原生数据类型（int/string/enum…）</td>
+<td align="center">抽象类</td>
 </tr>
 <tr>
-<td style="text-align:center">Unity内置数据类型（Vector/Rect/Color…）</td>
-<td style="text-align:center">静态类</td>
+<td align="center">Unity内置数据类型（Vector/Rect/Color…）</td>
+<td align="center">静态类</td>
 </tr>
 <tr>
-<td style="text-align:center">继承自UnityEngine.Object的类</td>
-<td style="text-align:center">泛型类</td>
+<td align="center">继承自UnityEngine.Object的类</td>
+<td align="center">泛型类</td>
 </tr>
 <tr>
-<td style="text-align:center">标记了[Serializable]属性的类</td>
-<td style="text-align:center">没有标记[Serializable]属性的类</td>
+<td align="center">标记了[Serializable]属性的类</td>
+<td align="center">没有标记[Serializable]属性的类</td>
 </tr>
 <tr>
-<td style="text-align:center">Array，List</td>
-<td style="text-align:center">其他容器</td>
+<td align="center">Array，List</td>
+<td align="center">其他容器</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>字段规则</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">该序列化的字段</th>
-<th style="text-align:center">不改序列化的字段</th>
+<th align="center">该序列化的字段</th>
+<th align="center">不改序列化的字段</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">public成员</td>
-<td style="text-align:center">private/const/readonly/static成员</td>
+<tbody><tr>
+<td align="center">public成员</td>
+<td align="center">private/const/readonly/static成员</td>
 </tr>
 <tr>
-<td style="text-align:center">标记了[SerializeField]属性的成员</td>
-<td style="text-align:center">标记 了[NonSerialized]属性的成员</td>
+<td align="center">标记了[SerializeField]属性的成员</td>
+<td align="center">标记 了[NonSerialized]属性的成员</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>编辑器退出前会对所有打开的窗口进行序列化并保存序列化数据到硬盘。在重启编辑器后，序列化系统读入序列化数据，重新生成对应的窗口对象。进行序列化时，只有满足序列化规则的对象的值得以保存，不满足规则的对象则被序列化系统忽略。</p>
 <p>举个例子：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> &#123;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[Serializable]</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClassSerializable</span> &#123;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> f1;</span><br><span class="line">    [NonSerialized]<span class="keyword">public</span> <span class="keyword">float</span> f2;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> i1;</span><br><span class="line">    [SerializeField]<span class="keyword">private</span> <span class="keyword">int</span> i2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SerializationRuleWindow</span> :</span> EditorWindow &#123;</span><br><span class="line">    <span class="keyword">public</span> MyClass m1;</span><br><span class="line">    <span class="keyword">public</span> MyClassSerializable s1;</span><br><span class="line">    <span class="keyword">private</span> MyClassSerializable s2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//首先看public MyClass m1，它的类型是MyClass，属于“没有标记[Serializable]属性的类”，不满足类型规则；它的字段是public，满足字段规则；系统要求两条规则同时满足的对象才能序列化，于是它被跳过了。</span></span><br><span class="line"><span class="comment">//接下来看public MyClassSerializable s1，它的类型是MyClassSerializable，属于标记了[Serializable]属性的类，满足类型规则；它的字段是public，满足字段规则；s1同时满足类型规则和字段规则，系统需要对它进行序列化操作。</span></span><br><span class="line"><span class="comment">//序列化是一个递归过程，对s1进行序列化意味着要对s1的所有类成员对象进行序列化判断。所以现在轮到s1中的成员进行规则判断了。</span></span><br><span class="line"><span class="comment">//public float f1，类型float是c#原生数据类型，满足类型规则；字段是public，满足字段规则；判断通过。</span></span><br><span class="line"><span class="comment">//[NonSerialized]public float f2，字段被标记了[NonSerialized]，不满足字段规则。</span></span><br><span class="line"><span class="comment">//private int i1，字段是private，不满足字段规则。</span></span><br><span class="line"><span class="comment">//[SerializeField]private int i2，类型int是c#原生数据类型，满足类型规则；字段被标记了[SerializeField]，满足字段规则；判断通过。</span></span><br><span class="line"><span class="comment">//所以s1中f1和i2通过了规则判断，f2和i1没有通过。所以图中s1.f1和s1.i2保留了原来的值。</span></span><br><span class="line"><span class="comment">//最后我们看private MyClassSerializable s2，这时相信我们都能轻易看出来，private不满足字段规则，s2被跳过。</span></span><br></pre></td></tr></table></figure>
+
 <h4 id="热重载-hot-reloading"><a href="#热重载-hot-reloading" class="headerlink" title="热重载(hot-reloading)"></a>热重载(hot-reloading)</h4><p>对Unity中的C#脚本进行修改可以即时编译，不需要重启编辑器就看看到效果，这是Unity编辑器的一个令人称赞的机制。你有没有想过它是怎么实现的呢？答案就是热重载。</p>
 <p>当编辑器检测到代码环境发生变化(脚本被修改、点击播放)时，会对所有现存的编辑器窗口进行热重载序列化。等待环境恢复(编译完成、转换到播放状态)时，编辑器根据之前序列化的值对编辑器窗口进行恢复。</p>
 <p>热重载序列化与标准序列化的不同点是，在进行热重载序列化时，字段规则被忽略，只要被处理对象满足类型规则，那么就对其进行序列化。</p>

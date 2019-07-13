@@ -6,7 +6,7 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -350,12 +350,15 @@
 <h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><h5 id="建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。"><a href="#建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。" class="headerlink" title="建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。"></a>建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。</h5><h5 id="列表初始化"><a href="#列表初始化" class="headerlink" title="列表初始化"></a>列表初始化</h5><p>使用{}初始化的特点是初始化内置类型的变量时候如果初始值存在数据长度不够引起丢失时，编译器会报错</p>
 <h4 id="变量声明合定义关系"><a href="#变量声明合定义关系" class="headerlink" title="变量声明合定义关系"></a>变量声明合定义关系</h4><p>变量前加extern表示声明，否者就是声明，声明可以有多此，定义只能有一次。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> i = <span class="number">0</span></span><br><span class="line">表示声明</span><br></pre></td></tr></table></figure>
+
 <h4 id="符合类型"><a href="#符合类型" class="headerlink" title="符合类型"></a>符合类型</h4><h5 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h5><p>&amp;d的形式来定义引用，d是变量名。定义引用时候必须初始化。引用只是一个别名，和初始化对象绑定到同一个值。</p>
 <h5 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h5><p>*d的形式定义指针，d是变量名。</p>
 <p>指针存放对象的地址，要想获取该地址，使用<strong>取地址符</strong>（&amp;）：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;i;</span><br></pre></td></tr></table></figure>
+
 <p>使用<strong>解引用符</strong>（*）来访问指针指向的对象：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; *p; <span class="comment">//输出1</span></span><br></pre></td></tr></table></figure>
+
 <p>和引用的区别</p>
 <ul>
 <li>指针本身就是一个对象，可以对他拷贝，赋值，可以改变指向的目标。</li>
@@ -363,10 +366,13 @@
 </ul>
 <h5 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h5><p>建议初始化所有的指针</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">int</span> *p = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> *p = <span class="literal">NULL</span>;<span class="comment">// #include cstilib, 不推荐使用</span></span><br><span class="line">上面三个初始化等价</span><br></pre></td></tr></table></figure>
+
 <p>if表达式中传入指针表示用指针的值来判断</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>(p) <span class="comment">// p的值是0，结果是false</span></span><br></pre></td></tr></table></figure>
+
 <h5 id="void-指针"><a href="#void-指针" class="headerlink" title="void * 指针"></a>void * 指针</h5><p>void *指针用于存放任意对象的地址。</p>
 <h5 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">**表示指向指针的指针；***表示指向指针的指针的指针；</span><br></pre></td></tr></table></figure>
+
 <h5 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h5><h4 id="const限定符"><a href="#const限定符" class="headerlink" title="const限定符"></a>const限定符</h4><p>const必须定义时候初始化。</p>
 <p>const的作用域是本文件，多个文件出现同名的const定义的变量实际上是分别独立的。如果希望共享，在其他文件中使用extern关键之声明一下，同时定义的时候也加上extern关键字（定义的时候加上extern表明这个const在其他地方会被共享）。</p>
 <p>const引用称之为<strong>对常量的引用</strong>,通常被叫做<strong>常量引用</strong>。非const引用无法引用一个const的对象。const指针和const引用类似。</p>

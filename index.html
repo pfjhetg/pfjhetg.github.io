@@ -6,7 +6,7 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -351,6 +351,9 @@
 </li>
 <li><p>AllowMultiple默认false。true表示允许属性多次附加到指定的类型上：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Something(<span class="string">"abc"</span>)]</span><br><span class="line">[Something(<span class="string">"abc"</span>)]</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ul>
 <ul>
@@ -360,8 +363,10 @@
 <p>通常只需要使用AttributeTargets即可。</p>
 <h4 id="Attribute"><a href="#Attribute" class="headerlink" title="Attribute"></a>Attribute</h4><p>Attribute经常伴随着Assembly和Type使用</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Assembly assembly = Assembly.GetExecutingAssembly();</span><br><span class="line">foreach (Type type in assembly.GetTypes())</span><br><span class="line">&#123;</span><br><span class="line">	object[] attrs = type.GetCustomAttributes(typeof(ConfigAttribute);</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>常用的地方有枚举属性</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">[AttributeUsage(AttributeTargets.Field | AttributeTargets.Enum)]</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PropertiesDesc</span> :</span> System.Attribute</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Desc &#123; get; <span class="keyword">private</span> <span class="built_in">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Properties</span><br><span class="line">&#123;</span><br><span class="line">    [PropertiesDesc(<span class="string">"血量"</span>)]</span><br><span class="line">    HP = <span class="number">1</span>,</span><br><span class="line">    [PropertiesDesc(<span class="string">"物理攻击"</span>)]</span><br><span class="line">    PhyAtk = <span class="number">2</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> GetDescByProperties(Properties p)</span><br><span class="line"> &#123;</span><br><span class="line">     Type type = p.GetType();</span><br><span class="line">     FieldInfo[] fields = type.GetFields();</span><br><span class="line">     foreach (FieldInfo field in fields)</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="keyword">if</span> (field.Name.Equals(p.ToString()))</span><br><span class="line">         &#123;</span><br><span class="line">             object[] objs = field.GetCustomAttributes(typeof(PropertiesDesc),<span class="literal">true</span>);</span><br><span class="line">             <span class="keyword">if</span> (objs != null &amp;&amp; objs.Length &gt; <span class="number">0</span>)</span><br><span class="line">             &#123;</span><br><span class="line">                 <span class="keyword">return</span> ((PropertiesDesc)objs[<span class="number">0</span>]).Desc;</span><br><span class="line">             &#125;</span><br><span class="line">             <span class="keyword">else</span></span><br><span class="line">             &#123;</span><br><span class="line">                 <span class="keyword">return</span> p.ToString() + <span class="string">"没有附加PropertiesDesc信息"</span>;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> <span class="string">"No Such field : "</span>+p;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
 <p>配置文件归档：给所有的配置文件归档成一个[Config]的属性，然后通过运行时Assembly去动态找出所有的配置文件进行归档使用。</p>
 
           
@@ -511,6 +516,7 @@
 </blockquote>
 <h4 id="什么是序列化"><a href="#什么是序列化" class="headerlink" title="什么是序列化"></a>什么是序列化</h4><p>序列化就是将数据结构或对象状态转换成可供Unity保存和随后重建的自动化处理过程</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“Serialization is the automatic process of transforming data structures or object states into a format that Unity can store and reconstruct later.”</span><br></pre></td></tr></table></figure>
+
 <p>Unity编辑器在很多时候会自动触发序列化：</p>
 <ul>
 <li>文件的保存/读取，包括Scene、Asset、AssetBundle，以及自定义的ScriptableObject等。</li>
@@ -523,55 +529,52 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:center">能序列化的类型</th>
-<th style="text-align:center">不能序列化的类型</th>
+<th align="center">能序列化的类型</th>
+<th align="center">不能序列化的类型</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">c#原生数据类型（int/string/enum…）</td>
-<td style="text-align:center">抽象类</td>
+<tbody><tr>
+<td align="center">c#原生数据类型（int/string/enum…）</td>
+<td align="center">抽象类</td>
 </tr>
 <tr>
-<td style="text-align:center">Unity内置数据类型（Vector/Rect/Color…）</td>
-<td style="text-align:center">静态类</td>
+<td align="center">Unity内置数据类型（Vector/Rect/Color…）</td>
+<td align="center">静态类</td>
 </tr>
 <tr>
-<td style="text-align:center">继承自UnityEngine.Object的类</td>
-<td style="text-align:center">泛型类</td>
+<td align="center">继承自UnityEngine.Object的类</td>
+<td align="center">泛型类</td>
 </tr>
 <tr>
-<td style="text-align:center">标记了[Serializable]属性的类</td>
-<td style="text-align:center">没有标记[Serializable]属性的类</td>
+<td align="center">标记了[Serializable]属性的类</td>
+<td align="center">没有标记[Serializable]属性的类</td>
 </tr>
 <tr>
-<td style="text-align:center">Array，List</td>
-<td style="text-align:center">其他容器</td>
+<td align="center">Array，List</td>
+<td align="center">其他容器</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>字段规则</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">该序列化的字段</th>
-<th style="text-align:center">不改序列化的字段</th>
+<th align="center">该序列化的字段</th>
+<th align="center">不改序列化的字段</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">public成员</td>
-<td style="text-align:center">private/const/readonly/static成员</td>
+<tbody><tr>
+<td align="center">public成员</td>
+<td align="center">private/const/readonly/static成员</td>
 </tr>
 <tr>
-<td style="text-align:center">标记了[SerializeField]属性的成员</td>
-<td style="text-align:center">标记 了[NonSerialized]属性的成员</td>
+<td align="center">标记了[SerializeField]属性的成员</td>
+<td align="center">标记 了[NonSerialized]属性的成员</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>编辑器退出前会对所有打开的窗口进行序列化并保存序列化数据到硬盘。在重启编辑器后，序列化系统读入序列化数据，重新生成对应的窗口对象。进行序列化时，只有满足序列化规则的对象的值得以保存，不满足规则的对象则被序列化系统忽略。</p>
 <p>举个例子：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> &#123;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[Serializable]</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClassSerializable</span> &#123;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> f1;</span><br><span class="line">    [NonSerialized]<span class="keyword">public</span> <span class="keyword">float</span> f2;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> i1;</span><br><span class="line">    [SerializeField]<span class="keyword">private</span> <span class="keyword">int</span> i2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SerializationRuleWindow</span> :</span> EditorWindow &#123;</span><br><span class="line">    <span class="keyword">public</span> MyClass m1;</span><br><span class="line">    <span class="keyword">public</span> MyClassSerializable s1;</span><br><span class="line">    <span class="keyword">private</span> MyClassSerializable s2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//首先看public MyClass m1，它的类型是MyClass，属于“没有标记[Serializable]属性的类”，不满足类型规则；它的字段是public，满足字段规则；系统要求两条规则同时满足的对象才能序列化，于是它被跳过了。</span></span><br><span class="line"><span class="comment">//接下来看public MyClassSerializable s1，它的类型是MyClassSerializable，属于标记了[Serializable]属性的类，满足类型规则；它的字段是public，满足字段规则；s1同时满足类型规则和字段规则，系统需要对它进行序列化操作。</span></span><br><span class="line"><span class="comment">//序列化是一个递归过程，对s1进行序列化意味着要对s1的所有类成员对象进行序列化判断。所以现在轮到s1中的成员进行规则判断了。</span></span><br><span class="line"><span class="comment">//public float f1，类型float是c#原生数据类型，满足类型规则；字段是public，满足字段规则；判断通过。</span></span><br><span class="line"><span class="comment">//[NonSerialized]public float f2，字段被标记了[NonSerialized]，不满足字段规则。</span></span><br><span class="line"><span class="comment">//private int i1，字段是private，不满足字段规则。</span></span><br><span class="line"><span class="comment">//[SerializeField]private int i2，类型int是c#原生数据类型，满足类型规则；字段被标记了[SerializeField]，满足字段规则；判断通过。</span></span><br><span class="line"><span class="comment">//所以s1中f1和i2通过了规则判断，f2和i1没有通过。所以图中s1.f1和s1.i2保留了原来的值。</span></span><br><span class="line"><span class="comment">//最后我们看private MyClassSerializable s2，这时相信我们都能轻易看出来，private不满足字段规则，s2被跳过。</span></span><br></pre></td></tr></table></figure>
+
 <h4 id="热重载-hot-reloading"><a href="#热重载-hot-reloading" class="headerlink" title="热重载(hot-reloading)"></a>热重载(hot-reloading)</h4><p>对Unity中的C#脚本进行修改可以即时编译，不需要重启编辑器就看看到效果，这是Unity编辑器的一个令人称赞的机制。你有没有想过它是怎么实现的呢？答案就是热重载。</p>
 <p>当编辑器检测到代码环境发生变化(脚本被修改、点击播放)时，会对所有现存的编辑器窗口进行热重载序列化。等待环境恢复(编译完成、转换到播放状态)时，编辑器根据之前序列化的值对编辑器窗口进行恢复。</p>
 <p>热重载序列化与标准序列化的不同点是，在进行热重载序列化时，字段规则被忽略，只要被处理对象满足类型规则，那么就对其进行序列化。</p>
@@ -738,11 +741,12 @@
 <li><a href="https://github.com/lbp0200/ssr-vultr" target="_blank" rel="noopener">自动部署链接</a></li>
 <li>登录SSH</li>
 </ul>
-<p><img src="/穿透测试/1562897244109.png" alt="1562897244109"></p>
+<p><img src="/2019/04/08/穿透测试/1562897244109.png" alt="1562897244109"></p>
 <h5 id="部署-Shadowsocks-服务器端"><a href="#部署-Shadowsocks-服务器端" class="headerlink" title="部署 Shadowsocks 服务器端"></a>部署 Shadowsocks 服务器端</h5><ol>
 <li>以下是3条命令，每次输入一行、回车，等待屏幕上的操作完成后再输入下一条</li>
 </ol>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一行</span></span><br><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https:<span class="comment">//raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span></span><br><span class="line"><span class="comment">// 第二行</span></span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line"><span class="comment">// 第三行</span></span><br><span class="line">./shadowsocks-all.sh <span class="number">2</span>&gt;&amp;<span class="number">1</span> | tee shadowsocks-all.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+
 <h4 id="加速"><a href="#加速" class="headerlink" title="加速"></a>加速</h4><p><a href="https://zhuanlan.zhihu.com/p/36750024" target="_blank" rel="noopener">链接1</a></p>
 <p><a href="https://www.jianshu.com/p/52815c34215e" target="_blank" rel="noopener">链接2</a></p>
 
@@ -895,12 +899,15 @@
 <h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><h5 id="建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。"><a href="#建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。" class="headerlink" title="建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。"></a>建议初始化每一个内置类型变量，防止引用未初始化变量引发的运行时故障。</h5><h5 id="列表初始化"><a href="#列表初始化" class="headerlink" title="列表初始化"></a>列表初始化</h5><p>使用{}初始化的特点是初始化内置类型的变量时候如果初始值存在数据长度不够引起丢失时，编译器会报错</p>
 <h4 id="变量声明合定义关系"><a href="#变量声明合定义关系" class="headerlink" title="变量声明合定义关系"></a>变量声明合定义关系</h4><p>变量前加extern表示声明，否者就是声明，声明可以有多此，定义只能有一次。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> i = <span class="number">0</span></span><br><span class="line">表示声明</span><br></pre></td></tr></table></figure>
+
 <h4 id="符合类型"><a href="#符合类型" class="headerlink" title="符合类型"></a>符合类型</h4><h5 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h5><p>&amp;d的形式来定义引用，d是变量名。定义引用时候必须初始化。引用只是一个别名，和初始化对象绑定到同一个值。</p>
 <h5 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h5><p>*d的形式定义指针，d是变量名。</p>
 <p>指针存放对象的地址，要想获取该地址，使用<strong>取地址符</strong>（&amp;）：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;i;</span><br></pre></td></tr></table></figure>
+
 <p>使用<strong>解引用符</strong>（*）来访问指针指向的对象：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; *p; <span class="comment">//输出1</span></span><br></pre></td></tr></table></figure>
+
 <p>和引用的区别</p>
 <ul>
 <li>指针本身就是一个对象，可以对他拷贝，赋值，可以改变指向的目标。</li>
@@ -908,10 +915,13 @@
 </ul>
 <h5 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h5><p>建议初始化所有的指针</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">int</span> *p = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> *p = <span class="literal">NULL</span>;<span class="comment">// #include cstilib, 不推荐使用</span></span><br><span class="line">上面三个初始化等价</span><br></pre></td></tr></table></figure>
+
 <p>if表达式中传入指针表示用指针的值来判断</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>(p) <span class="comment">// p的值是0，结果是false</span></span><br></pre></td></tr></table></figure>
+
 <h5 id="void-指针"><a href="#void-指针" class="headerlink" title="void * 指针"></a>void * 指针</h5><p>void *指针用于存放任意对象的地址。</p>
 <h5 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">**表示指向指针的指针；***表示指向指针的指针的指针；</span><br></pre></td></tr></table></figure>
+
 <h5 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h5><h4 id="const限定符"><a href="#const限定符" class="headerlink" title="const限定符"></a>const限定符</h4><p>const必须定义时候初始化。</p>
 <p>const的作用域是本文件，多个文件出现同名的const定义的变量实际上是分别独立的。如果希望共享，在其他文件中使用extern关键之声明一下，同时定义的时候也加上extern关键字（定义的时候加上extern表明这个const在其他地方会被共享）。</p>
 <p>const引用称之为<strong>对常量的引用</strong>,通常被叫做<strong>常量引用</strong>。非const引用无法引用一个const的对象。const指针和const引用类似。</p>
@@ -1065,36 +1075,34 @@
 <thead>
 <tr>
 <th>约束</th>
-<th style="text-align:left">说明</th>
+<th align="left">说明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>where T: struct</td>
-<td style="text-align:left">类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见<a href="https://msdn.microsoft.com/zh-cn/library/2cf62fcy.aspx" target="_blank" rel="noopener">使用可以为 null 的类型（C# 编程指南）</a>。</td>
+<td align="left">类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见<a href="https://msdn.microsoft.com/zh-cn/library/2cf62fcy.aspx" target="_blank" rel="noopener">使用可以为 null 的类型（C# 编程指南）</a>。</td>
 </tr>
 <tr>
 <td>where T : class</td>
-<td style="text-align:left">类型参数必须是引用类型；这一点也适用于任何类、接口、委托或数组类型。</td>
+<td align="left">类型参数必须是引用类型；这一点也适用于任何类、接口、委托或数组类型。</td>
 </tr>
 <tr>
 <td>where T : new()</td>
-<td style="text-align:left">类型参数必须具有无参数的公共构造函数。 当与其他约束一起使用时，new() 约束必须最后指定。</td>
+<td align="left">类型参数必须具有无参数的公共构造函数。 当与其他约束一起使用时，new() 约束必须最后指定。</td>
 </tr>
 <tr>
 <td>where T : &lt;base class name&gt;</td>
-<td style="text-align:left">类型参数必须是指定的基类或派生自指定的基类。</td>
+<td align="left">类型参数必须是指定的基类或派生自指定的基类。</td>
 </tr>
 <tr>
 <td>where T : &lt;interface name&gt;</td>
-<td style="text-align:left">类型参数必须是指定的接口或实现指定的接口。 可以指定多个接口约束。 约束接口也可以是泛型的。</td>
+<td align="left">类型参数必须是指定的接口或实现指定的接口。 可以指定多个接口约束。 约束接口也可以是泛型的。</td>
 </tr>
 <tr>
 <td>where T : U</td>
-<td style="text-align:left">为 T 提供的类型参数必须是为 U 提供的参数或派生自为 U 提供的参数。</td>
+<td align="left">为 T 提供的类型参数必须是为 U 提供的参数或派生自为 U 提供的参数。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>这几个可以混合使用，比如where T : class, new(); where T : class1,  calss2;等</p>
 
           
@@ -1243,36 +1251,34 @@
 <thead>
 <tr>
 <th>约束</th>
-<th style="text-align:left">说明</th>
+<th align="left">说明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>where T: struct</td>
-<td style="text-align:left">类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见<a href="https://msdn.microsoft.com/zh-cn/library/2cf62fcy.aspx" target="_blank" rel="noopener">使用可以为 null 的类型（C# 编程指南）</a>。</td>
+<td align="left">类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见<a href="https://msdn.microsoft.com/zh-cn/library/2cf62fcy.aspx" target="_blank" rel="noopener">使用可以为 null 的类型（C# 编程指南）</a>。</td>
 </tr>
 <tr>
 <td>where T : class</td>
-<td style="text-align:left">类型参数必须是引用类型；这一点也适用于任何类、接口、委托或数组类型。</td>
+<td align="left">类型参数必须是引用类型；这一点也适用于任何类、接口、委托或数组类型。</td>
 </tr>
 <tr>
 <td>where T : new()</td>
-<td style="text-align:left">类型参数必须具有无参数的公共构造函数。 当与其他约束一起使用时，new() 约束必须最后指定。</td>
+<td align="left">类型参数必须具有无参数的公共构造函数。 当与其他约束一起使用时，new() 约束必须最后指定。</td>
 </tr>
 <tr>
 <td>where T : &lt;base class name&gt;</td>
-<td style="text-align:left">类型参数必须是指定的基类或派生自指定的基类。</td>
+<td align="left">类型参数必须是指定的基类或派生自指定的基类。</td>
 </tr>
 <tr>
 <td>where T : &lt;interface name&gt;</td>
-<td style="text-align:left">类型参数必须是指定的接口或实现指定的接口。 可以指定多个接口约束。 约束接口也可以是泛型的。</td>
+<td align="left">类型参数必须是指定的接口或实现指定的接口。 可以指定多个接口约束。 约束接口也可以是泛型的。</td>
 </tr>
 <tr>
 <td>where T : U</td>
-<td style="text-align:left">为 T 提供的类型参数必须是为 U 提供的参数或派生自为 U 提供的参数。</td>
+<td align="left">为 T 提供的类型参数必须是为 U 提供的参数或派生自为 U 提供的参数。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>这几个可以混合使用，比如where T : class, new(); where T : class1,  calss2;等</p>
 
           
@@ -1417,12 +1423,16 @@
           
             <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo <span class="keyword">new</span> <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
 <p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
 <h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
           

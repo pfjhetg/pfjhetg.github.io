@@ -6,7 +6,7 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="在泛型类型定义之后（类中或者方法中）使用 where 约束泛型类型，使用方式类似继承的语法。 可以直接参考微软的类型参数的约束（C#编程指南）    约束 说明     where T: struct 类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见使用可以为 null 的类型（C# 编程指南）。   where T : class 类型参数必须是引用">
+<meta name="description" content="在泛型类型定义之后（类中或者方法中）使用 where 约束泛型类型，使用方式类似继承的语法。 可以直接参考微软的类型参数的约束（C#编程指南）    约束 说明    where T: struct 类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见使用可以为 null 的类型（C# 编程指南）。   where T : class 类型参数必须是引用类">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C# 泛型约束">
 <meta property="og:url" content="http://pfjhetg.github.iom/2019/03/21/C Sharp 泛型约束/index.html">
 <meta property="og:site_name" content="pfjhetg">
-<meta property="og:description" content="在泛型类型定义之后（类中或者方法中）使用 where 约束泛型类型，使用方式类似继承的语法。 可以直接参考微软的类型参数的约束（C#编程指南）    约束 说明     where T: struct 类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见使用可以为 null 的类型（C# 编程指南）。   where T : class 类型参数必须是引用">
+<meta property="og:description" content="在泛型类型定义之后（类中或者方法中）使用 where 约束泛型类型，使用方式类似继承的语法。 可以直接参考微软的类型参数的约束（C#编程指南）    约束 说明    where T: struct 类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见使用可以为 null 的类型（C# 编程指南）。   where T : class 类型参数必须是引用类">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-06-19T03:39:42.930Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C# 泛型约束">
-<meta name="twitter:description" content="在泛型类型定义之后（类中或者方法中）使用 where 约束泛型类型，使用方式类似继承的语法。 可以直接参考微软的类型参数的约束（C#编程指南）    约束 说明     where T: struct 类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见使用可以为 null 的类型（C# 编程指南）。   where T : class 类型参数必须是引用">
+<meta name="twitter:description" content="在泛型类型定义之后（类中或者方法中）使用 where 约束泛型类型，使用方式类似继承的语法。 可以直接参考微软的类型参数的约束（C#编程指南）    约束 说明    where T: struct 类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见使用可以为 null 的类型（C# 编程指南）。   where T : class 类型参数必须是引用类">
 
 
 
@@ -347,36 +347,34 @@
 <thead>
 <tr>
 <th>约束</th>
-<th style="text-align:left">说明</th>
+<th align="left">说明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>where T: struct</td>
-<td style="text-align:left">类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见<a href="https://msdn.microsoft.com/zh-cn/library/2cf62fcy.aspx" target="_blank" rel="noopener">使用可以为 null 的类型（C# 编程指南）</a>。</td>
+<td align="left">类型参数必须是值类型。 可以指定除 Nullable 以外的任何值类型。 有关更多信息，请参见<a href="https://msdn.microsoft.com/zh-cn/library/2cf62fcy.aspx" target="_blank" rel="noopener">使用可以为 null 的类型（C# 编程指南）</a>。</td>
 </tr>
 <tr>
 <td>where T : class</td>
-<td style="text-align:left">类型参数必须是引用类型；这一点也适用于任何类、接口、委托或数组类型。</td>
+<td align="left">类型参数必须是引用类型；这一点也适用于任何类、接口、委托或数组类型。</td>
 </tr>
 <tr>
 <td>where T : new()</td>
-<td style="text-align:left">类型参数必须具有无参数的公共构造函数。 当与其他约束一起使用时，new() 约束必须最后指定。</td>
+<td align="left">类型参数必须具有无参数的公共构造函数。 当与其他约束一起使用时，new() 约束必须最后指定。</td>
 </tr>
 <tr>
 <td>where T : &lt;base class name&gt;</td>
-<td style="text-align:left">类型参数必须是指定的基类或派生自指定的基类。</td>
+<td align="left">类型参数必须是指定的基类或派生自指定的基类。</td>
 </tr>
 <tr>
 <td>where T : &lt;interface name&gt;</td>
-<td style="text-align:left">类型参数必须是指定的接口或实现指定的接口。 可以指定多个接口约束。 约束接口也可以是泛型的。</td>
+<td align="left">类型参数必须是指定的接口或实现指定的接口。 可以指定多个接口约束。 约束接口也可以是泛型的。</td>
 </tr>
 <tr>
 <td>where T : U</td>
-<td style="text-align:left">为 T 提供的类型参数必须是为 U 提供的参数或派生自为 U 提供的参数。</td>
+<td align="left">为 T 提供的类型参数必须是为 U 提供的参数或派生自为 U 提供的参数。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>这几个可以混合使用，比如where T : class, new(); where T : class1,  calss2;等</p>
 
       
