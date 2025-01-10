@@ -628,3 +628,4 @@ media.net, 8CU5L226O, RESELLER
 bidmachine.io, 896, RESELLER
 openx.com, 540396775, RESELLER, 6a698e2ec38604c6
 xandr.com, 13293, RESELLER, f5ab79cb980f11d1
+google.com, pub-8104927941042701, DIRECT, f08c47fec0942fa0
