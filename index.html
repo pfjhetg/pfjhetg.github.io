@@ -151,6 +151,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.io/2025/02/02/Unity%E6%8E%A5%E5%85%A5SDK%E7%9B%B8%E5%85%B3%E6%B5%81%E6%B0%B4%E8%B4%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="pfjhetg">
+      <meta itemprop="description" content="蹇胜的博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pfjhetg">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/02/02/Unity%E6%8E%A5%E5%85%A5SDK%E7%9B%B8%E5%85%B3%E6%B5%81%E6%B0%B4%E8%B4%A6/" class="post-title-link" itemprop="url">Unity接入Topon/Taku</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-02-02 22:26:48 / 修改时间：22:54:51" itemprop="dateCreated datePublished" datetime="2025-02-02T22:26:48+08:00">2025-02-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B8%B8%E6%88%8F%E4%B8%8A%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">游戏上架</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="广告平台"><a href="#广告平台" class="headerlink" title="广告平台"></a>广告平台</h2><blockquote>
+<p>我们的游戏想同时上海外和国内，同时又想更省事，所以就选择了Topon&#x2F;Taku，如果只放在国内，好像很推荐GroMore。<br>详细的接入方式这里就不写出来了，看文档是最快的，这里只简短的说出一些需要注意的点和踩过的坑。 </p>
+</blockquote>
+<h3 id="Topon和Taku区别"><a href="#Topon和Taku区别" class="headerlink" title="Topon和Taku区别"></a>Topon和Taku区别</h3><p>Topon是专注海外，Taku是专注国内，官方说好像是Android不能互通iOS可以（可能我记混了，但是不重要），实际上我体验下来是完全不能互通，我尝试过用海外的SDK包来接国内，导致广告一直不通，也去给工作人员反馈过，他说可能是bug，后面也没有深究了，就直接认定不互通了，省事。</p>
+<p>基于我自己的经验，老老实实分开不会有问题，国内版本SDK接入后工具栏上名称是<code>AnyThink</code>,海外版工具栏上名称是<code>TpnPlugin</code>。记住这点就可以了</p>
+<h4 id="国内平台简称"><a href="#国内平台简称" class="headerlink" title="国内平台简称"></a>国内平台简称</h4><ul>
+<li>穿山甲 &#x3D; Csj</li>
+<li>腾讯 &#x3D; Gdt</li>
+<li>快手 &#x3D; Kuaishou</li>
+<li>百度 &#x3D; Baidu</li>
+</ul>
+<h2 id="一些流水账"><a href="#一些流水账" class="headerlink" title="一些流水账"></a>一些流水账</h2><h3 id="iOS-SDK-流水账"><a href="#iOS-SDK-流水账" class="headerlink" title="iOS SDK 流水账"></a>iOS SDK 流水账</h3><ul>
+<li>iOS打包需要把Bugly和Talkingdata的库在unity中去掉Add to Embedded Binaries。可能其他一些库也需要这样的操作，需要自己检查</li>
+</ul>
+<h3 id="AppStore-测试"><a href="#AppStore-测试" class="headerlink" title="AppStore 测试"></a>AppStore 测试</h3><ul>
+<li>iOS需要把账号所有的银行，税务信息完善了才可以测试内购，否者拉不到内购商品数据。</li>
+</ul>
+<h3 id="Google-Play-测试"><a href="#Google-Play-测试" class="headerlink" title="Google Play 测试"></a>Google Play 测试</h3><ul>
+<li>测试需要发布内部测试版本，然后通过添加测试账户，在测试账户上按照Google Play进行更新，一般发布后几分钟就可以在Google Play上面的更新中发现内测版更新。</li>
+<li>网上说Google Play内购测试和Google Play版本有关，我本地一直没有测试成功不知道是不是这个愿意，待后面验证了来更新</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.io/2025/02/02/iOS%E6%B8%B8%E6%88%8F%E4%B8%8A%E6%9E%B6TapTap%E7%9A%84%E6%95%85%E4%BA%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -176,7 +264,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-02-02 16:00:39 / 修改时间：21:18:58" itemprop="dateCreated datePublished" datetime="2025-02-02T16:00:39+08:00">2025-02-02</time>
+              <time title="创建时间：2025-02-02 16:00:39 / 修改时间：22:27:26" itemprop="dateCreated datePublished" datetime="2025-02-02T16:00:39+08:00">2025-02-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -491,7 +579,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
