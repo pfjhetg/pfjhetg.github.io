@@ -632,3 +632,4 @@ google.com, pub-8104927941042701, DIRECT, f08c47fec0942fa0
 toponad.com, 1637c7655643f7, DIRECT, 1d49fe424a1a456d
 yeahmobi.com, 1637c7655643f7, DIRECT
 zmaticoo.com, 1637c7655643f7, DIRECT
+google.com, pub-5208784855831184, DIRECT, f08c47fec0942fa0
