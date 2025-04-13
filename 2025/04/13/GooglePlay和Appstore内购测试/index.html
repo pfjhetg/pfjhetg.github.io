@@ -23,19 +23,19 @@
     var CONFIG = {"hostname":"pfjhetg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="为什么要写下来？ 不要太相信自己的记忆力，写下来后后面每次上新产品直接来这里看就可以了。  基本上按照官方的教程走就行了，但是这里要特别的列出几点自己理解上容易出错的点，但是不一定理解是正确的，只是能保证自己跑起来。 凭证部分 凭证的名称一定要和App名称一致，否则会导致登录失败。 凭证部分需要特别注意，在Unity中配置的都是web应用的（也就是凭证部分对应的服务器的哪一个）。并且由于Googl">
+  <meta name="description" content="为什么要写下来？ 不要太相信自己的记忆力，写下来后后面每次上新产品直接来这里看就可以了。   GooglePlay内购 测试第一步需要把测试账号的GooglePlayApp上的地区改成国外（非中国） 测试需要发布内部测试版本，然后通过添加测试账户，在测试账户上按照Google Play进行更新，一般发布后几分钟就可以在Google Play上面的更新中发现内测版更新（这个已经过时） 最新的测试是只">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Unity接入GooglePlayGame">
-<meta property="og:url" content="http://pfjhetg.github.io/2025/02/02/Unity%E6%8E%A5%E5%85%A5GooglePlayGame/index.html">
+<meta property="og:title" content="GooglePlay和Appstore内购">
+<meta property="og:url" content="http://pfjhetg.github.io/2025/04/13/GooglePlay%E5%92%8CAppstore%E5%86%85%E8%B4%AD%E6%B5%8B%E8%AF%95/index.html">
 <meta property="og:site_name" content="pfjhetg">
-<meta property="og:description" content="为什么要写下来？ 不要太相信自己的记忆力，写下来后后面每次上新产品直接来这里看就可以了。  基本上按照官方的教程走就行了，但是这里要特别的列出几点自己理解上容易出错的点，但是不一定理解是正确的，只是能保证自己跑起来。 凭证部分 凭证的名称一定要和App名称一致，否则会导致登录失败。 凭证部分需要特别注意，在Unity中配置的都是web应用的（也就是凭证部分对应的服务器的哪一个）。并且由于Googl">
+<meta property="og:description" content="为什么要写下来？ 不要太相信自己的记忆力，写下来后后面每次上新产品直接来这里看就可以了。   GooglePlay内购 测试第一步需要把测试账号的GooglePlayApp上的地区改成国外（非中国） 测试需要发布内部测试版本，然后通过添加测试账户，在测试账户上按照Google Play进行更新，一般发布后几分钟就可以在Google Play上面的更新中发现内测版更新（这个已经过时） 最新的测试是只">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-02-02T14:26:48.000Z">
-<meta property="article:modified_time" content="2025-04-13T14:57:47.369Z">
+<meta property="article:published_time" content="2025-04-13T15:01:22.000Z">
+<meta property="article:modified_time" content="2025-04-13T15:01:30.289Z">
 <meta property="article:author" content="pfjhetg">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://pfjhetg.github.io/2025/02/02/Unity%E6%8E%A5%E5%85%A5GooglePlayGame/">
+<link rel="canonical" href="http://pfjhetg.github.io/2025/04/13/GooglePlay%E5%92%8CAppstore%E5%86%85%E8%B4%AD%E6%B5%8B%E8%AF%95/">
 
 
 <script id="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>Unity接入GooglePlayGame | pfjhetg</title>
+  <title>GooglePlay和Appstore内购 | pfjhetg</title>
   
 
 
@@ -154,7 +154,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.io/2025/02/02/Unity%E6%8E%A5%E5%85%A5GooglePlayGame/">
+    <link itemprop="mainEntityOfPage" href="http://pfjhetg.github.io/2025/04/13/GooglePlay%E5%92%8CAppstore%E5%86%85%E8%B4%AD%E6%B5%8B%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -167,7 +167,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Unity接入GooglePlayGame
+          GooglePlay和Appstore内购
         </h1>
 
         <div class="post-meta">
@@ -176,16 +176,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2025-02-02 22:26:48" itemprop="dateCreated datePublished" datetime="2025-02-02T22:26:48+08:00">2025-02-02</time>
+              <time title="创建时间：2025-04-13 23:01:22 / 修改时间：23:01:30" itemprop="dateCreated datePublished" datetime="2025-04-13T23:01:22+08:00">2025-04-13</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-04-13 22:57:47" itemprop="dateModified" datetime="2025-04-13T22:57:47+08:00">2025-04-13</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -208,16 +202,22 @@
 
       
         <h2 id="为什么要写下来？"><a href="#为什么要写下来？" class="headerlink" title="为什么要写下来？"></a>为什么要写下来？</h2><blockquote>
-<p>不要太相信自己的记忆力，写下来后后面每次上新产品直接来这里看就可以了。</p>
+<p>不要太相信自己的记忆力，写下来后后面每次上新产品直接来这里看就可以了。 </p>
 </blockquote>
-<p>基本上按照官方的教程走就行了，但是这里要特别的列出几点自己理解上容易出错的点，但是不一定理解是正确的，只是能保证自己跑起来。</p>
-<h3 id="凭证部分"><a href="#凭证部分" class="headerlink" title="凭证部分"></a>凭证部分</h3><ul>
-<li>凭证的名称一定要和App名称一致，否则会导致登录失败。</li>
-<li>凭证部分需要特别注意，在Unity中配置的都是web应用的（也就是凭证部分对应的服务器的哪一个）。并且由于Google会重新给每一个上传的应用重新生成一个密钥，因此配置凭证部分要有2个Android的和一个服务器的，并且把Google生成的哪个设置成新安装应用将试用此凭证。</li>
+<h3 id="GooglePlay内购"><a href="#GooglePlay内购" class="headerlink" title="GooglePlay内购"></a>GooglePlay内购</h3><ul>
+<li>测试第一步需要把测试账号的GooglePlayApp上的地区改成国外（非中国）</li>
+<li>测试需要发布内部测试版本，然后通过添加测试账户，在测试账户上按照Google Play进行更新，一般发布后几分钟就可以在Google Play上面的更新中发现内测版更新（这个已经过时）</li>
+<li>最新的测试是只要去GooglePlay后台配置对应商品数据，并且要添加测试用户，直接本地打包测试账户也可以测试内购</li>
+<li>不确定是不是要想iOS一样先把所有的银行卡，税务信息完善了才可以测试内购</li>
 </ul>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ul>
-<li>打包apk测试没问题后，需要检查aab的测试，因为aab测试用的凭证是和apk的不一样的。</li>
+<h3 id="AppStore-内购"><a href="#AppStore-内购" class="headerlink" title="AppStore 内购"></a>AppStore 内购</h3><ul>
+<li>iOS需要把账号所有的银行，税务信息完善了才可以测试内购，否者拉不到内购商品数据，这是大前提</li>
+<li>iOS内购首次提交需要和App审核一起提交，后续的更改都只需要直接修改（改地区，改描述之类的），不用提新包，只是这个审核可能会慢一点，重新提新包也不会加速这个过程，内购审核和包体更新是分开的</li>
 </ul>
+<h3 id="恢复购买"><a href="#恢复购买" class="headerlink" title="恢复购买"></a>恢复购买</h3><blockquote>
+<p>恢复购买在iOS和Android上很不一样，需要特别注意</p>
+</blockquote>
+<p>Android的恢复购买是首次安装进入应用的自动会触发，这个逻辑在Unity上面就是再调用一次购买成功的回调，因此Android的购买成功回调和恢复购买回调完全是一样的逻辑<br>iOS的恢复购买是用户自己去主动调用方法，最终恢复成功的标准也是调用一次购买成功的回调，因此iOS可以通过增加一个参数来判断是否点击了恢复购买来区分是购买成功还是恢复购买。</p>
 
     </div>
 
@@ -233,13 +233,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/02/02/iOS%E6%B8%B8%E6%88%8F%E4%B8%8A%E6%9E%B6TapTap%E7%9A%84%E6%95%85%E4%BA%8B/" rel="prev" title="iOS游戏上架TapTap的故事">
-      <i class="fa fa-chevron-left"></i> iOS游戏上架TapTap的故事
+    <a href="/2025/04/10/Unity%E6%8E%A5%E5%85%A5GooglePlayGame/" rel="prev" title="Unity接入GooglePlayGame">
+      <i class="fa fa-chevron-left"></i> Unity接入GooglePlayGame
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/02/02/GooglePlay%E5%92%8CAppstore%E5%86%85%E8%B4%AD%E6%B5%8B%E8%AF%95/" rel="next" title="GooglePlay和Appstore内购">
-      GooglePlay和Appstore内购 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -298,7 +295,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%86%99%E4%B8%8B%E6%9D%A5%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">为什么要写下来？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%AD%E8%AF%81%E9%83%A8%E5%88%86"><span class="nav-number">1.1.</span> <span class="nav-text">凭证部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">1.2.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%86%99%E4%B8%8B%E6%9D%A5%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">为什么要写下来？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GooglePlay%E5%86%85%E8%B4%AD"><span class="nav-number">1.1.</span> <span class="nav-text">GooglePlay内购</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AppStore-%E5%86%85%E8%B4%AD"><span class="nav-number">1.2.</span> <span class="nav-text">AppStore 内购</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E8%B4%AD%E4%B9%B0"><span class="nav-number">1.3.</span> <span class="nav-text">恢复购买</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
