@@ -630,4 +630,6 @@ openx.com, 540396775, RESELLER, 6a698e2ec38604c6
 xandr.com, 13293, RESELLER, f5ab79cb980f11d1
 google.com, pub-5208784855831184, DIRECT, f08c47fec0942fa0
 toponad.com, [publisher_uuid], DIRECT, 1d49fe424a1a456d
+google.com, pub-5208784855831184, DIRECT, f08c47fec0942fa0
+facebook.com, 4040784416133331, DIRECT, c3e20eee3f780d68
 tpmn.io, 391, RESELLER
