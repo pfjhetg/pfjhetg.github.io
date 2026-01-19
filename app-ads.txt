@@ -632,5 +632,6 @@ google.com, pub-5208784855831184, DIRECT, f08c47fec0942fa0
 toponad.com, [publisher_uuid], DIRECT, 1d49fe424a1a456d
 google.com, pub-5208784855831184, DIRECT, f08c47fec0942fa0
 facebook.com, 4040784416133331, DIRECT, c3e20eee3f780d68
+facebook.com, 4597900157202029, DIRECT, c3e20eee3f780d68
 tpmn.io, 391, RESELLER
 vungle.com, 692d38f607f8cfcae2cbec73, DIRECT, c107d686becd2d77
