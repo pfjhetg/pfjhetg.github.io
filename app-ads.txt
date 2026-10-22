@@ -1280,3 +1280,4 @@ video.unrulymedia.com, 3890682751, RESELLER
 video.unrulymedia.com, 713332123, RESELLER, 98c21ef9a666c68b
 video.unrulymedia.com, 839999282, RESELLER, 98c21ef9a666c68b
 zetaglobal.net, 767, RESELLER
+adagio.io, 1050, RESELLER
