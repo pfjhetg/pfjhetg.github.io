@@ -1285,3 +1285,4 @@ triplelift.com, 14705-EB, RESELLER
 start.io, 131192070, RESELLER
 monetrix.ai, 10761, RESELLER
 google.com, pub-5208784855831184, DIRECT, f08c47fec0942fa0
+playdigo.com, 1965, RESELLER
